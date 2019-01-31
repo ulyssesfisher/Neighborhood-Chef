@@ -1,5 +1,3 @@
-const $ = require('jquery');
-
 $('#search-btn').on('click', (e) => {
   e.preventDefault();
 
