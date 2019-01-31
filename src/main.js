@@ -1,3 +1,7 @@
+const $ = require('jquery');
+import functions from './functions'
+
+functions.add(3,4)
 $('#search-btn').on('click', (e) => {
   e.preventDefault();
 
