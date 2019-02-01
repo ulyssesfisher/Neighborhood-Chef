@@ -5,22 +5,31 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+  <link href="main.css" rel="stylesheet" type="text/css">
   <title>neighborhood-chef</title>
 </head>
 
 <body>
   <noscript>
-    <strong>We're sorry but neighborhood-chef doesn't work properly without JavaScript enabled. Please enable it to
-      continue.</strong>
+    <strong>
+      We're sorry but neighborhood-chef doesn't work properly without JavaScript enabled. Please enable it to continue.
+    </strong>
   </noscript>
-  <div id="app">
-    <form>
-      <input type="text" name="query" id="query-input">
-      <button id="search-btn">Search!</button>
-    </form>
-    <hr>
-    <div id="results"></div>
-    <script src="../dist/main.js"></script>
+  <div id="page">
+    <div id="category-search" class="d-flex justify-content-center align-items-center">
+      <form autocomplete="off">
+        <div class="input-group input-group-lg border-rounded">
+          <input class="form-control rounded-pill" placeholder="I'm in the mood for..." type="text" name="query" id="query-input">
+          <div class="input-group-append ml-2">
+            <span class="input-group-text rounded-pill" id="search-btn">Search</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="../dist/main.js"></script>
 </body>
 
 </html>
