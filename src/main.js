@@ -1,4 +1,5 @@
 const $ = require("jquery");
+require("./faker");
 import ui from "./ui";
 import api from "./api";
 
