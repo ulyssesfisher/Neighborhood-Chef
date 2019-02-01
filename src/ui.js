@@ -1,7 +1,3 @@
-/**
- * This file is reserved for functions that apply to making ui changes.
- */
-
 const $ = require("jquery");
 
 const renderRestaurants = function(restaurants) {
