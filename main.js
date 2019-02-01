@@ -1,3 +1,4 @@
+const cuisineArray = [];
 
 let array = []
 
