@@ -1,6 +1,7 @@
 const $ = require("jquery");
 import ui from "./ui";
 import api from "./api";
+import createChefProfiles from "./faker";
 
 // feel free to change if you need to
 const zomatoApiKey = "4732218ff276d0553217a3671fcd8ebf";
@@ -15,6 +16,7 @@ $("#query-input").on("keydown", function(e) {
 $("#search-btn").on("click", function(e) {
   e.preventDefault();
   ui.showLoadingState(e.target);
+  createChefProfiles();
 
   const query = $("#query-input").val().trim();
 
