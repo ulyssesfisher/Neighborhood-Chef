@@ -1,8 +1,7 @@
 const $ = require("jquery");
-var faker = require('faker');
-const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","Italian"];
 import ui from "./ui";
 import api from "./api";
+import createChefProfiles from "./faker";
 
 // feel free to change if you need to
 const zomatoApiKey = "4732218ff276d0553217a3671fcd8ebf";
@@ -13,30 +12,6 @@ $("#query-input").on("keydown", function(e) {
     e.preventDefault();
   }
 });
-const createChefProfiles = function(){
-  for (let i = 0; i < 5; i++) {
-
-    $('<img/>', {
-        src: faker.image.avatar()
-    }).appendTo('#wrapper');
-
-    $('<div/>', {
-        text: faker.name.findName()
-    }).appendTo('#wrapper');
-
-    $('<div/>', {
-        text: faker.company.companyName()
-    }).appendTo('#wrapper');
-
-    $('<div/>', {
-        text: faker.internet.email()
-    }).appendTo('#wrapper');
-
-    $('<div/>', {
-        text: faker.internet.domainName()
-    }).appendTo('#wrapper');
-}
-}
 
 $("#search-btn").on("click", function(e) {
   e.preventDefault();
