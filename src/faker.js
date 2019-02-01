@@ -1,7 +1,7 @@
 const $ = require("jquery");
 var faker = require('faker');
 const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","Italian"];
-let array = []
+let array = [];
 
 
 
@@ -11,6 +11,7 @@ let array = []
         $('<img/>', {
             src: faker.image.avatar()
         }).appendTo('#wrapper');
+
 
         $('<div/>', {
             text: faker.name.findName()
