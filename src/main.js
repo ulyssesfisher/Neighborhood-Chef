@@ -3,6 +3,16 @@ import ui from "./ui";
 import api from "./api";
 import createChefProfiles from "./faker";
 
+if ("geolocation" in navigator) {
+	//console.log(
+		//navigator.geolocation.getCurrentPosition(function(position) {
+			//console.log('position', position)
+		//})
+	//);
+} else {
+	console.log('no geolocation');
+}
+
 // The api key for the zomato api
 // feel free to change as needed
 const zomatoApiKey = "4732218ff276d0553217a3671fcd8ebf";

@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
     crossorigin="anonymous">
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
   <link href="main.css" rel="stylesheet" type="text/css">
   <title>neighborhood-chef</title>
 </head>
@@ -17,18 +18,26 @@
       We're sorry but neighborhood-chef doesn't work properly without JavaScript enabled. Please enable it to continue.
     </strong>
   </noscript>
-  <div id="wrapper"></div>
+  <div class="container">
+	  <div id="wrapper">
+		  <h2>Chefs</h2>
+		  <div class="card-deck" id="chef-results">
+		  </div>
+		  <div class="card-deck" id="restaurant-results">
+		  </div>
+	  </div>
+  </div>
   <div id="page">
-    <div id="category-search" class="d-flex justify-content-center align-items-center">
-      <form autocomplete="off">
-        <div class="input-group input-group-lg border-rounded">
-          <input class="form-control rounded-pill" placeholder="I'm in the mood for..." type="text" name="query" id="query-input">
-          <div class="input-group-append ml-2">
-            <span class="input-group-text rounded-pill" id="search-btn">Search</span>
-          </div>
-        </div>
-      </form>
-    </div>
+	<div id="category-search" class="d-flex justify-content-center align-items-center">
+	  <form autocomplete="off">
+		<div class="input-group input-group-lg border-rounded">
+		  <input class="form-control rounded-pill" placeholder="I'm in the mood for..." type="text" name="query" id="query-input">
+		  <div class="input-group-append ml-2">
+			<span class="input-group-text rounded-pill" id="search-btn">Search</span>
+		  </div>
+		</div>
+	  </form>
+	</div>
   </div>
   <script src="../dist/main.js"></script>
 </body>

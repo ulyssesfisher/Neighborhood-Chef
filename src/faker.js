@@ -12,14 +12,25 @@ const numberOfChefs = 5;
  */
 const createChefProfileTemplate = function(chef) {
     return (`
-        <div id="chef-${chef.id}">
-            <img src="${chef.avatar}">
-            <div>
-                <p>${chef.name}</p>
-                <p>${chef.company}</p>
-                <p>${chef.name}</p>
-                <p>${chef.email}</p>
-                <p>${chef.website}</p>
+        <div class="card p-2" id="chef-${chef.id}" style="width: 18rem;">
+            <img class="card-img-top rounded" src="${chef.avatar}">
+            <div class="card-body">
+				<img class="rounded-circle float-right" height="57.91" width="57.91" src="${chef.avatar}">
+				<h5 class="card-title text-muted">${chef.name}</h5>
+				<i class="fas fa-star"></i>
+				<i class="fas fa-star"></i>
+				<i class="fas fa-star"></i>
+				<i class="fas fa-star"></i>
+				<i class="fas fa-star-half-alt"></i>
+				
+				<p class="text-muted text-center pt-3">
+					Lorem Ipsum Lorem Ipsum
+					Lorem Ipsum Lorem Ipsum
+					Lorem Ipsum Lorem Ipsum
+					Lorem Ipsum Lorem Ipsum
+					Lorem Ipsum Lorem Ipsum
+				</p>
+				<button class="btn btn-primary btn-lg d-block mx-auto rounded-pill" style="width: 11.5rem;">See Menu</button>
             </div>
         </div>
 	`)
@@ -51,7 +62,7 @@ const createChefProfiles = function(){
 
         const profile = createChefProfileTemplate(chef);
 
-        $('#wrapper').append(profile);
+        $('#chef-results').append(profile);
     }
   }
 
