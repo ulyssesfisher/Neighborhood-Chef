@@ -3,8 +3,15 @@ var faker = require('faker');
 const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","Italian"];
 const numberOfChefs = 5;
 
-const createChefProfile = function(chef) {
-    return `
+/**
+ * Create an html template for the chef profile
+ *
+ * @param {Object) An object representing the chef data
+ *
+ * @return {String} An string containing the html template for a chef profile template
+ */
+const createChefProfileTemplate = function(chef) {
+    return (`
         <div id="chef-${chef.id}">
             <img src="${chef.avatar}">
             <div>
@@ -15,8 +22,14 @@ const createChefProfile = function(chef) {
                 <p>${chef.website}</p>
             </div>
         </div>
-`};
+	`)
+};
 
+/**
+ * Creates an object containing key:pair values of the chef data
+ *
+ * @return {Object} The chef object
+ */
 const createChef = function() {
     return {
         id: faker.random.uuid(),
@@ -29,11 +42,14 @@ const createChef = function() {
     }
 };
 
+/**
+ * Creates multiple chef profiles
+ */
 const createChefProfiles = function(){
     for(let i = 0; i < numberOfChefs; i++) {
         const chef = createChef();
 
-        const profile = createChefProfile(chef);
+        const profile = createChefProfileTemplate(chef);
 
         $('#wrapper').append(profile);
     }

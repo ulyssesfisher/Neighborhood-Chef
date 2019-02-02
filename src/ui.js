@@ -1,5 +1,10 @@
 const $ = require("jquery");
 
+/**
+ * Renders a list of restaurant and appends them to page
+ *
+ * @param {Array} restaurants - list of restaurants to append
+ */
 const renderRestaurants = function(restaurants) {
     let resultsPage = "";
 
