@@ -1,7 +1,6 @@
 const $ = require("jquery");
 import ui from "./ui";
 import api from "./api";
-import createChefProfiles from "./faker";
 
 if ("geolocation" in navigator) {
 	//console.log(
@@ -37,7 +36,6 @@ $("#search-btn").on("click", function(e) {
 	  xhr.setRequestHeader("user-key", zomatoApiKey);
 	}
   }).then(function(response) {
-	ui.renderRestaurants(response.restaurants);
-	createChefProfiles();
+		ui.renderResultsPage(response.restaurants);
   });
 });

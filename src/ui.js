@@ -1,21 +1,42 @@
 const $ = require("jquery");
+import { createChefProfiles } from "./faker";
 
 /**
- * Renders a list of restaurant and appends them to page
+ * Renders a list of results and appends them to page
  *
  * @param {Array} restaurants - list of restaurants to append
  */
-const renderRestaurants = function(restaurants) {
-    let resultsPage = "";
+const renderResultsPage = function(restaurants) {
+    let restaurantView = "";
 
     restaurants.forEach(restaurant => {
-      resultsPage += `
-        <div>
-          <p>${restaurant.restaurant.name}</p>
+      restaurantView += `
+        <div class="card">
+          <div class="card-body">
+            <p>${restaurant.restaurant.name}</p>
+          </div>
         </div>
-        <br>
       `;
     });
+
+    let profiles = createChefProfiles(4);
+
+    let resultsPage = `
+    <div class="container">
+      <div id="wrapper">
+        <h2>Chefs</h2>
+        <div class="card-deck" id="chef-results">
+          ${profiles}
+        </div>
+
+        <h2>Restaurants</h2>
+        <div class="card-deck" id="restaurant-results">
+          ${restaurantView}
+        </div>
+      </div>
+    </div>
+    `;
+
     renderPage(resultsPage);
 };
 
@@ -49,7 +70,7 @@ const showLoadingState = function(selector) {
 const ui = {
     showLoadingState: showLoadingState,
     renderPage: renderPage,
-    renderRestaurants: renderRestaurants,
+    renderResultsPage: renderResultsPage,
 }
 
 export default ui;

@@ -1,7 +1,6 @@
 const $ = require("jquery");
 var faker = require('faker');
 const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","Italian"];
-const numberOfChefs = 5;
 
 /**
  * Create an html template for the chef profile
@@ -22,9 +21,8 @@ const createChefProfileTemplate = function(chef) {
 				<i class="fas fa-star"></i>
 				<i class="fas fa-star"></i>
 				<i class="fas fa-star-half-alt"></i>
-				
+
 				<p class="text-muted text-center pt-3">
-					Lorem Ipsum Lorem Ipsum
 					Lorem Ipsum Lorem Ipsum
 					Lorem Ipsum Lorem Ipsum
 					Lorem Ipsum Lorem Ipsum
@@ -55,15 +53,19 @@ const createChef = function() {
 
 /**
  * Creates multiple chef profiles
+ *
+ * @param {Number} number - the number of chefs to create
  */
-const createChefProfiles = function(){
+const createChefProfiles = function(numberOfChefs){
+    let template = "";
+
     for(let i = 0; i < numberOfChefs; i++) {
         const chef = createChef();
 
-        const profile = createChefProfileTemplate(chef);
-
-        $('#chef-results').append(profile);
+        template += createChefProfileTemplate(chef);
     }
+
+    return template;
   }
 
-  export default createChefProfiles;
+  export { createChefProfiles };
