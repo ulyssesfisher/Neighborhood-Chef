@@ -11,7 +11,7 @@ const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","
  */
 const createChefProfileTemplate = function(chef) {
     return (`
-        <div class="card p-2" id="chef-${chef.id}" style="width: 18rem;">
+        <div class="card p-2 col-3 col-xs-12 shadow-sm" id="chef-${chef.id}" style="width: 18rem;">
             <img class="card-img-top rounded" src="${chef.avatar}">
             <div class="card-body">
 				<img class="rounded-circle float-right" height="57.91" width="57.91" src="${chef.avatar}">
