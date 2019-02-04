@@ -28,7 +28,7 @@ const createChefProfileTemplate = function(chef) {
 					Lorem Ipsum Lorem Ipsum
 					Lorem Ipsum Lorem Ipsum
 				</p>
-				<button class="btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn " style="width: 11.5rem;">See Menu</button>
+				<button class="btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn" data-chef-id="${chef.name}" style="width: 11.5rem;">See Menu</button>
             </div>
         </div>
 	`)

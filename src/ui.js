@@ -64,8 +64,9 @@ const renderResultsPage = function(restaurants) {
 
   renderPage(resultsPage);
 
-  $('.chef-btn').on('click', function() {
+  $('.chef-btn').on('click', function(event) {
     $('#chefModal').modal('show');
+    console.log(event.target.dataset.chefId)
   })
 };
 

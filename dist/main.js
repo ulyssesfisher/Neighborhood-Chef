@@ -111810,7 +111810,7 @@ var cuisineArray = ["American", "Greek", "Mexican", "Chinese", "Thai", "Indian",
  */
 
 var createChefProfileTemplate = function createChefProfileTemplate(chef) {
-  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn \" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n\t");
+  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.name, "\" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n\t");
 };
 /**
  * Creates an object containing key:pair values of the chef data
@@ -111932,8 +111932,9 @@ var renderResultsPage = function renderResultsPage(restaurants) {
   var profiles = Object(_faker__WEBPACK_IMPORTED_MODULE_0__["createChefProfiles"])(4);
   var resultsPage = "\n    <nav class=\"navbar navbar-expand-lg navbar-dark mb-5\" style=\"background-color: #8C4D2E;\">\n    <a class=\"navbar-brand\" href=\"#\">Neighborhood Chef</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n      <div class=\"navbar-nav\">\n        <a class=\"nav-item nav-link active\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n        <a class=\"nav-item nav-link\" href=\"#\">Features</a>\n        <a class=\"nav-item nav-link\" href=\"#\">Pricing</a>\n      </div>\n    </div>\n  </nav>\n    <div class=\"container\">\n      <div id=\"wrapper\">\n        <h2>Chefs</h2>\n        <div class=\"card-deck\" id=\"chef-results\">\n          ".concat(profiles, "\n        </div>\n\n        <hr>\n\n        <h2>Restaurants</h2>\n        <div class=\"row\" id=\"restaurant-results\">\n          ").concat(restaurantView, "\n        </div>\n      </div>\n    </div>\n    ");
   renderPage(resultsPage);
-  $('.chef-btn').on('click', function () {
+  $('.chef-btn').on('click', function (event) {
     $('#chefModal').modal('show');
+    console.log(event.target.dataset.chefId);
   });
 };
 /**
@@ -111979,7 +111980,7 @@ var ui = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/erwinssaget/Code/homework/neighborhood-chef/src/main.js */"./src/main.js");
+module.exports = __webpack_require__(/*! C:\Users\Ulysses Fisher\bootcamp\neighborhood-chef\src\main.js */"./src/main.js");
 
 
 /***/ })
