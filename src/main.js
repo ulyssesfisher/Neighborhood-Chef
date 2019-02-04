@@ -1,5 +1,5 @@
-require('bootstrap');
-const $ = require("jquery");
+import "bootstrap";
+import $ from "jquery";
 import ui from "./ui";
 import api from "./api";
 

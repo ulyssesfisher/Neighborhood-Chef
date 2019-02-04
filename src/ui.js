@@ -1,15 +1,28 @@
 const $ = require("jquery");
 import { createChefProfiles, chefs } from "./faker";
 
+// When you run the function, it appends the profile to the modal
+const appendModalProfile = function (profile) {
+const templateProfile =
+    `<div class = "modalProfile">
+      <p>This is the bio: ${profile.bio}</p>
+      <p>Company: ${profile.company}</p>
+      <p>Email: ${profile.email}</p>
+    </div>`
+  $(".modal-body").empty();
+  $(".modal-body").append(templateProfile);
+  $(".modal-title").text(`${profile.name}`);
+};
+
 /**
  * Renders a list of results and appends them to page
  *
  * @param {Array} restaurants - list of restaurants to append
  */
-const renderResultsPage = function(restaurants) {
+const renderResultsPage = function (restaurants) {
   let restaurantView = "";
 
-  restaurants.forEach(function({ restaurant }) {
+  restaurants.forEach(function ({ restaurant }) {
     restaurantView += `
         <div class="col-4 col-xs-12">
         <div class="card mb-4 shadow-sm">
@@ -64,26 +77,27 @@ const renderResultsPage = function(restaurants) {
 
   renderPage(resultsPage);
 
-  $('.chef-btn').on('click', function(event) {
-    $('#chefModal').modal('show');
-    let result = chefs.find(function(chef) {
+  $('.chef-btn').on('click', function (event) {
+    let chef = chefs.find(function (chef) {
       return chef.id == event.target.dataset.chefId;
-    })
-    console.log(result)
-  })
+    });
+    appendModalProfile(chef);
+    $('#chefModal').modal('show');
+  });
 };
+
 
 /**
  * Changes content of the html page
  *
  * @param {String} page - the html content we want to add
  */
-const renderPage = function(page) {
+const renderPage = function (page) {
   const pageContainer = $("#page");
 
   // pageContainer.fadeOut(400, function() {
-    pageContainer.empty();
-    pageContainer.append(page)//.fadeIn();
+  pageContainer.empty();
+  pageContainer.append(page)//.fadeIn();
   // });
 };
 
@@ -92,7 +106,7 @@ const renderPage = function(page) {
  *
  * @param {String} selector the target selector
  */
-const showLoadingState = function(selector) {
+const showLoadingState = function (selector) {
   $(selector).empty();
   $(selector).append(
     `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;Loading...`

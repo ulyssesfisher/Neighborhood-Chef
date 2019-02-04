@@ -111812,7 +111812,7 @@ var chefs = [];
  */
 
 var createChefProfileTemplate = function createChefProfileTemplate(chef) {
-  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.id, "\" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n\t");
+  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n                <div class = \"chefBio\">").concat(chef.bio, "</div>\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.id, "\" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n\t");
 };
 /**
  * Creates an object containing key:pair values of the chef data
@@ -111867,11 +111867,13 @@ var createChefProfiles = function createChefProfiles(numberOfChefs) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api */ "./src/api.js");
-__webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./api */ "./src/api.js");
 
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 
 
@@ -111889,22 +111891,22 @@ if ("geolocation" in navigator) {//console.log(
 
 var zomatoApiKey = "4732218ff276d0553217a3671fcd8ebf"; // if we hit the enter button on the query input don't submit the form
 
-$("#query-input").on("keydown", function (e) {
+jquery__WEBPACK_IMPORTED_MODULE_1___default()("#query-input").on("keydown", function (e) {
   if (e.keyCode == 13) e.preventDefault();
 }); // The event that occurs when the user hits the search button
 // for a category
 
-$("#search-btn").on("click", function (e) {
+jquery__WEBPACK_IMPORTED_MODULE_1___default()("#search-btn").on("click", function (e) {
   e.preventDefault();
-  _ui__WEBPACK_IMPORTED_MODULE_0__["default"].showLoadingState(e.target);
-  var query = $("#query-input").val().trim();
+  _ui__WEBPACK_IMPORTED_MODULE_2__["default"].showLoadingState(e.target);
+  var query = jquery__WEBPACK_IMPORTED_MODULE_1___default()("#query-input").val().trim();
   var queryUrl = "https://developers.zomato.com/api/v2.1/search?entity_id=288&entity_type=city&q=".concat(query);
-  _api__WEBPACK_IMPORTED_MODULE_1__["default"].get(queryUrl, {
+  _api__WEBPACK_IMPORTED_MODULE_3__["default"].get(queryUrl, {
     beforeSend: function beforeSend(xhr) {
       xhr.setRequestHeader("user-key", zomatoApiKey);
     }
   }).then(function (response) {
-    _ui__WEBPACK_IMPORTED_MODULE_0__["default"].renderResultsPage(response.restaurants);
+    _ui__WEBPACK_IMPORTED_MODULE_2__["default"].renderResultsPage(response.restaurants);
   });
 });
 
@@ -111922,12 +111924,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _faker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./faker */ "./src/faker.js");
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
+ // When you run the function, it appends the profile to the modal
 
+var appendModalProfile = function appendModalProfile(profile) {
+  var templateProfile = "<div class = \"modalProfile\">\n      <p>This is the bio: ".concat(profile.bio, "</p>\n      <p>Company: ").concat(profile.company, "</p>\n      <p>Email: ").concat(profile.email, "</p>\n    </div>");
+  $(".modal-body").empty();
+  $(".modal-body").append(templateProfile);
+  $(".modal-title").text("".concat(profile.name));
+};
 /**
  * Renders a list of results and appends them to page
  *
  * @param {Array} restaurants - list of restaurants to append
  */
+
 
 var renderResultsPage = function renderResultsPage(restaurants) {
   var restaurantView = "";
@@ -111939,11 +111949,11 @@ var renderResultsPage = function renderResultsPage(restaurants) {
   var resultsPage = "\n    <nav class=\"navbar navbar-expand-lg navbar-dark mb-5\" style=\"background-color: #8C4D2E;\">\n    <a class=\"navbar-brand\" href=\"#\">Neighborhood Chef</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n      <div class=\"navbar-nav\">\n        <a class=\"nav-item nav-link active\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n        <a class=\"nav-item nav-link\" href=\"#\">Features</a>\n        <a class=\"nav-item nav-link\" href=\"#\">Pricing</a>\n      </div>\n    </div>\n  </nav>\n    <div class=\"container\">\n      <div id=\"wrapper\">\n        <h2>Chefs</h2>\n        <div class=\"card-deck\" id=\"chef-results\">\n          ".concat(profiles, "\n        </div>\n\n        <hr>\n\n        <h2>Restaurants</h2>\n        <div class=\"row\" id=\"restaurant-results\">\n          ").concat(restaurantView, "\n        </div>\n      </div>\n    </div>\n    ");
   renderPage(resultsPage);
   $('.chef-btn').on('click', function (event) {
-    $('#chefModal').modal('show');
-    var result = _faker__WEBPACK_IMPORTED_MODULE_0__["chefs"].find(function (chef) {
+    var chef = _faker__WEBPACK_IMPORTED_MODULE_0__["chefs"].find(function (chef) {
       return chef.id == event.target.dataset.chefId;
     });
-    console.log(result);
+    appendModalProfile(chef);
+    $('#chefModal').modal('show');
   });
 };
 /**
@@ -111989,7 +111999,7 @@ var ui = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/erwinssaget/Code/homework/neighborhood-chef/src/main.js */"./src/main.js");
+module.exports = __webpack_require__(/*! C:\Users\new\gtbootcamp\Neighborhood-Chef\src\main.js */"./src/main.js");
 
 
 /***/ })
