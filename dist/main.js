@@ -111924,13 +111924,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _faker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./faker */ "./src/faker.js");
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
- // When you run the function, it appends the profile to the modal
+ // append the modal content
 
-var appendModalProfile = function appendModalProfile(profile) {
-  var templateProfile = "<div class = \"modalProfile\">\n      <p>This is the bio: ".concat(profile.bio, "</p>\n      <p>Company: ").concat(profile.company, "</p>\n      <p>Email: ").concat(profile.email, "</p>\n    </div>");
+var appendModalContent = function appendModalContent(content) {
   $(".modal-body").empty();
-  $(".modal-body").append(templateProfile);
+  $(".modal-body").append(content);
+}; // When you run the function, it appends the profile to the modal
+
+
+var appendChefProfile = function appendChefProfile(profile) {
+  appendModalContent("\n    <div class = \"modalProfile\">\n      <p>This is the bio: ".concat(profile.bio, "</p>\n      <p>Company: ").concat(profile.company, "</p>\n      <p>Email: ").concat(profile.email, "</p>\n    </div>\n  "));
   $(".modal-title").text("".concat(profile.name));
+};
+
+var appendRestaurantProfile = function appendRestaurantProfile(_ref) {
+  var restaurant = _ref.restaurant;
+  appendModalContent("\n    <div class=\"modalProfile\">\n      ".concat(restaurant.name, "\n    </div>\n  "));
 };
 /**
  * Renders a list of results and appends them to page
@@ -111941,18 +111950,28 @@ var appendModalProfile = function appendModalProfile(profile) {
 
 var renderResultsPage = function renderResultsPage(restaurants) {
   var restaurantView = "";
-  restaurants.forEach(function (_ref) {
-    var restaurant = _ref.restaurant;
-    restaurantView += "\n        <div class=\"col-4 col-xs-12\">\n        <div class=\"card mb-4 shadow-sm\">\n            <img class=\"\" src=\"".concat(restaurant.thumb, "\">\n            <div class=\"card-body\">\n              <p class=\"card-text\">").concat(restaurant.name, "</p>\n              <div class=\"d-flex justify-content-between align-items-center\">\n                <div class=\"btn-group\">\n                <a href=\"").concat(restaurant.menu_url, "\" target=\"_blank\" class=\"btn btn-sm btn-outline-secondary\">Home</a>\n                <a href=\"\" class=\"btn btn-sm btn-outline-secondary\">Contact</a>\n                </div>\n                <small class=\"text-muted\">X Miles Away</small>\n              </div>\n            </div>\n          </div>\n        </div>\n      ");
+  restaurants.forEach(function (_ref2) {
+    var restaurant = _ref2.restaurant;
+    restaurantView += "\n        <div class=\"col-4 col-xs-12\">\n        <div class=\"card mb-4 shadow-sm\">\n            <img class=\"\" src=\"".concat(restaurant.thumb, "\">\n            <div class=\"card-body\">\n              <p class=\"card-text\">").concat(restaurant.name, "</p>\n              <div class=\"d-flex justify-content-between align-items-center\">\n                <div class=\"btn-group\">\n                <a href=\"").concat(restaurant.menu_url, "\" target=\"_blank\" class=\"btn btn-sm btn-outline-secondary\">Home</a>\n                <a href=\"javascript:void(0)\" class=\"btn btn-sm btn-outline-secondary restaurant-modal\" data-rest-id=\"").concat(restaurant.id, "\">Contact</a>\n                </div>\n                <small class=\"text-muted\">X Miles Away</small>\n              </div>\n            </div>\n          </div>\n        </div>\n      ");
   });
   var profiles = Object(_faker__WEBPACK_IMPORTED_MODULE_0__["createChefProfiles"])(4);
   var resultsPage = "\n    <nav class=\"navbar navbar-expand-lg navbar-dark mb-5\" style=\"background-color: #8C4D2E;\">\n    <a class=\"navbar-brand\" href=\"#\">Neighborhood Chef</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n      <div class=\"navbar-nav\">\n        <a class=\"nav-item nav-link active\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n        <a class=\"nav-item nav-link\" href=\"#\">Features</a>\n        <a class=\"nav-item nav-link\" href=\"#\">Pricing</a>\n      </div>\n    </div>\n  </nav>\n    <div class=\"container\">\n      <div id=\"wrapper\">\n        <h2>Chefs</h2>\n        <div class=\"card-deck\" id=\"chef-results\">\n          ".concat(profiles, "\n        </div>\n\n        <hr>\n\n        <h2>Restaurants</h2>\n        <div class=\"row\" id=\"restaurant-results\">\n          ").concat(restaurantView, "\n        </div>\n      </div>\n    </div>\n    ");
-  renderPage(resultsPage);
+  renderPage(resultsPage); // chef card event listener
+
   $('.chef-btn').on('click', function (event) {
     var chef = _faker__WEBPACK_IMPORTED_MODULE_0__["chefs"].find(function (chef) {
       return chef.id == event.target.dataset.chefId;
     });
-    appendModalProfile(chef);
+    appendChefProfile(chef);
+    $('#chefModal').modal('show');
+  }); // restaurant card event listener
+
+  $(".restaurant-modal").on("click", function () {
+    var rest = restaurants.find(function (_ref3) {
+      var restaurant = _ref3.restaurant;
+      return restaurant.id == event.target.dataset.restId;
+    });
+    appendRestaurantProfile(rest);
     $('#chefModal').modal('show');
   });
 };
@@ -111999,7 +112018,7 @@ var ui = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\new\gtbootcamp\Neighborhood-Chef\src\main.js */"./src/main.js");
+module.exports = __webpack_require__(/*! /Users/MannyCortez/bootcamp/Neighborhood-Chef/src/main.js */"./src/main.js");
 
 
 /***/ })

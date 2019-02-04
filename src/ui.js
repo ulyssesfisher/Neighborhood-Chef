@@ -1,18 +1,33 @@
 const $ = require("jquery");
 import { createChefProfiles, chefs } from "./faker";
 
+
+// append the modal content
+const appendModalContent= function(content) {
+  $(".modal-body").empty();
+  $(".modal-body").append(content);
+}
+
 // When you run the function, it appends the profile to the modal
-const appendModalProfile = function (profile) {
-const templateProfile =
-    `<div class = "modalProfile">
+const appendChefProfile = function (profile) {
+  appendModalContent(`
+    <div class = "modalProfile">
       <p>This is the bio: ${profile.bio}</p>
       <p>Company: ${profile.company}</p>
       <p>Email: ${profile.email}</p>
-    </div>`
-  $(".modal-body").empty();
-  $(".modal-body").append(templateProfile);
+    </div>
+  `);
+
   $(".modal-title").text(`${profile.name}`);
 };
+
+const appendRestaurantProfile = function ({ restaurant }) {
+  appendModalContent(`
+    <div class="modalProfile">
+      ${restaurant.name}
+    </div>
+  `);
+}
 
 /**
  * Renders a list of results and appends them to page
@@ -32,7 +47,7 @@ const renderResultsPage = function (restaurants) {
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                 <a href="${restaurant.menu_url}" target="_blank" class="btn btn-sm btn-outline-secondary">Home</a>
-                <a href="" class="btn btn-sm btn-outline-secondary">Contact</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary restaurant-modal" data-rest-id="${restaurant.id}">Contact</a>
                 </div>
                 <small class="text-muted">X Miles Away</small>
               </div>
@@ -77,13 +92,25 @@ const renderResultsPage = function (restaurants) {
 
   renderPage(resultsPage);
 
+  // chef card event listener
   $('.chef-btn').on('click', function (event) {
     let chef = chefs.find(function (chef) {
       return chef.id == event.target.dataset.chefId;
     });
-    appendModalProfile(chef);
+    appendChefProfile(chef);
     $('#chefModal').modal('show');
   });
+
+  // restaurant card event listener
+  $(".restaurant-modal").on("click", function() {
+    let rest = restaurants.find(function ({ restaurant }) {
+      return restaurant.id == event.target.dataset.restId;
+    });
+
+    appendRestaurantProfile(rest);
+
+    $('#chefModal').modal('show');
+  })
 };
 
 
@@ -121,3 +148,4 @@ const ui = {
 };
 
 export default ui;
+
