@@ -7,7 +7,6 @@ import { createChefProfiles } from "./faker";
  * @param {Array} restaurants - list of restaurants to append
  */
 const renderResultsPage = function(restaurants) {
-  console.log(restaurants)
   let restaurantView = "";
 
   restaurants.forEach(function({ restaurant }) {
@@ -64,6 +63,10 @@ const renderResultsPage = function(restaurants) {
     `;
 
   renderPage(resultsPage);
+
+  $('.chef-btn').on('click', function() {
+    $('#chefModal').modal('show');
+  })
 };
 
 /**
@@ -74,10 +77,10 @@ const renderResultsPage = function(restaurants) {
 const renderPage = function(page) {
   const pageContainer = $("#page");
 
-  pageContainer.fadeOut(400, function() {
+  // pageContainer.fadeOut(400, function() {
     pageContainer.empty();
-    pageContainer.append(page).fadeIn();
-  });
+    pageContainer.append(page)//.fadeIn();
+  // });
 };
 
 /**

@@ -1,3 +1,4 @@
+require('bootstrap');
 const $ = require("jquery");
 import ui from "./ui";
 import api from "./api";
