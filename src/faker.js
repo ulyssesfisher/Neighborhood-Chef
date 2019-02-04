@@ -1,6 +1,7 @@
 const $ = require("jquery");
 var faker = require('faker');
 const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","Italian"];
+const chefs = [];
 
 /**
  * Create an html template for the chef profile
@@ -28,7 +29,7 @@ const createChefProfileTemplate = function(chef) {
 					Lorem Ipsum Lorem Ipsum
 					Lorem Ipsum Lorem Ipsum
 				</p>
-				<button class="btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn" data-chef-id="${chef.name}" style="width: 11.5rem;">See Menu</button>
+				<button class="btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn" data-chef-id="${chef.id}" style="width: 11.5rem;">See Menu</button>
             </div>
         </div>
 	`)
@@ -47,6 +48,7 @@ const createChef = function() {
         company: faker.company.companyName(),
         email: faker.internet.email(),
         website: faker.internet.domainName(),
+        bio: faker.lorem.paragraph(),
         cuisines: cuisineArray[Math.floor(Math.random() * cuisineArray.length)]
     }
 };
@@ -55,17 +57,22 @@ const createChef = function() {
  * Creates multiple chef profiles
  *
  * @param {Number} number - the number of chefs to create
+ *
+ * @return {String} template - a string representing all the chefs in a single template
  */
 const createChefProfiles = function(numberOfChefs){
+
     let template = "";
 
     for(let i = 0; i < numberOfChefs; i++) {
         const chef = createChef();
 
         template += createChefProfileTemplate(chef);
+
+        chefs.push(chef);
     }
 
     return template;
   }
 
-  export { createChefProfiles };
+  export { createChefProfiles, chefs };

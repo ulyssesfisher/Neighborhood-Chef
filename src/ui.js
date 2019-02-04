@@ -1,5 +1,5 @@
 const $ = require("jquery");
-import { createChefProfiles } from "./faker";
+import { createChefProfiles, chefs } from "./faker";
 
 /**
  * Renders a list of results and appends them to page
@@ -66,7 +66,10 @@ const renderResultsPage = function(restaurants) {
 
   $('.chef-btn').on('click', function(event) {
     $('#chefModal').modal('show');
-    console.log(event.target.dataset.chefId)
+    let result = chefs.find(function(chef) {
+      return chef.id == event.target.dataset.chefId;
+    })
+    console.log(result)
   })
 };
 

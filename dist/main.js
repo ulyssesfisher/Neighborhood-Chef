@@ -111790,17 +111790,19 @@ var api = {
 /*!**********************!*\
   !*** ./src/faker.js ***!
   \**********************/
-/*! exports provided: createChefProfiles */
+/*! exports provided: createChefProfiles, chefs */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChefProfiles", function() { return createChefProfiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chefs", function() { return chefs; });
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var faker = __webpack_require__(/*! faker */ "./node_modules/faker/index.js");
 
 var cuisineArray = ["American", "Greek", "Mexican", "Chinese", "Thai", "Indian", "Italian"];
+var chefs = [];
 /**
  * Create an html template for the chef profile
  *
@@ -111810,7 +111812,7 @@ var cuisineArray = ["American", "Greek", "Mexican", "Chinese", "Thai", "Indian",
  */
 
 var createChefProfileTemplate = function createChefProfileTemplate(chef) {
-  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.name, "\" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n\t");
+  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t\tLorem Ipsum Lorem Ipsum\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.id, "\" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n\t");
 };
 /**
  * Creates an object containing key:pair values of the chef data
@@ -111827,6 +111829,7 @@ var createChef = function createChef() {
     company: faker.company.companyName(),
     email: faker.internet.email(),
     website: faker.internet.domainName(),
+    bio: faker.lorem.paragraph(),
     cuisines: cuisineArray[Math.floor(Math.random() * cuisineArray.length)]
   };
 };
@@ -111834,6 +111837,8 @@ var createChef = function createChef() {
  * Creates multiple chef profiles
  *
  * @param {Number} number - the number of chefs to create
+ *
+ * @return {String} template - a string representing all the chefs in a single template
  */
 
 
@@ -111843,6 +111848,7 @@ var createChefProfiles = function createChefProfiles(numberOfChefs) {
   for (var i = 0; i < numberOfChefs; i++) {
     var chef = createChef();
     template += createChefProfileTemplate(chef);
+    chefs.push(chef);
   }
 
   return template;
@@ -111934,7 +111940,10 @@ var renderResultsPage = function renderResultsPage(restaurants) {
   renderPage(resultsPage);
   $('.chef-btn').on('click', function (event) {
     $('#chefModal').modal('show');
-    console.log(event.target.dataset.chefId);
+    var result = _faker__WEBPACK_IMPORTED_MODULE_0__["chefs"].find(function (chef) {
+      return chef.id == event.target.dataset.chefId;
+    });
+    console.log(result);
   });
 };
 /**
@@ -111980,7 +111989,7 @@ var ui = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Ulysses Fisher\bootcamp\neighborhood-chef\src\main.js */"./src/main.js");
+module.exports = __webpack_require__(/*! /Users/erwinssaget/Code/homework/neighborhood-chef/src/main.js */"./src/main.js");
 
 
 /***/ })
