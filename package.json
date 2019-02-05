@@ -11,6 +11,7 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "dependencies": {
+    "@google/maps": "^0.5.5",
     "bootstrap": "^4.2.1",
     "cross-env": "^5.1",
     "faker": "^4.1.0",

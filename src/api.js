@@ -1,6 +1,7 @@
 import $ from "jquery";
 
 const api = {
+
     /**
      * Fetches data from an api endpoint
      * @param {String} url The url we want to hit
