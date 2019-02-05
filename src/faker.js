@@ -1,5 +1,6 @@
-const $ = require("jquery");
-var faker = require('faker');
+import $ from "jquery";
+import faker from  "faker";
+
 const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","Italian"];
 const chefs = [];
 

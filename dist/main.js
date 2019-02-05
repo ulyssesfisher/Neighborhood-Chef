@@ -111765,18 +111765,20 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
 var api = {
   /**
-   * Method used to fetch data from an api
-   *
+   * Fetches data from an api endpoint
    * @param {String} url The url we want to hit
-   * @param {Object} options An optional object containing the header options that can be passed to $.ajax function
+   * @param {Object} [options] An optional object containing the header options that can be passed to $.ajax function
+   *
+   * @returns {Promise} Promise object represents the response of the api
    */
   get: function get(url) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    return $.ajax(Object.assign({
+    return jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax(Object.assign({
       url: url,
       method: "GET"
     }, options));
@@ -111797,9 +111799,11 @@ var api = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChefProfiles", function() { return createChefProfiles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chefs", function() { return chefs; });
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! faker */ "./node_modules/faker/index.js");
+/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(faker__WEBPACK_IMPORTED_MODULE_1__);
 
-var faker = __webpack_require__(/*! faker */ "./node_modules/faker/index.js");
 
 var cuisineArray = ["American", "Greek", "Mexican", "Chinese", "Thai", "Indian", "Italian"];
 var chefs = [];
@@ -111823,13 +111827,13 @@ var createChefProfileTemplate = function createChefProfileTemplate(chef) {
 
 var createChef = function createChef() {
   return {
-    id: faker.random.uuid(),
-    avatar: faker.image.avatar(),
-    name: faker.name.findName(),
-    company: faker.company.companyName(),
-    email: faker.internet.email(),
-    website: faker.internet.domainName(),
-    bio: faker.lorem.paragraph(),
+    id: faker__WEBPACK_IMPORTED_MODULE_1___default.a.random.uuid(),
+    avatar: faker__WEBPACK_IMPORTED_MODULE_1___default.a.image.avatar(),
+    name: faker__WEBPACK_IMPORTED_MODULE_1___default.a.name.findName(),
+    company: faker__WEBPACK_IMPORTED_MODULE_1___default.a.company.companyName(),
+    email: faker__WEBPACK_IMPORTED_MODULE_1___default.a.internet.email(),
+    website: faker__WEBPACK_IMPORTED_MODULE_1___default.a.internet.domainName(),
+    bio: faker__WEBPACK_IMPORTED_MODULE_1___default.a.lorem.paragraph(),
     cuisines: cuisineArray[Math.floor(Math.random() * cuisineArray.length)]
   };
 };
@@ -111884,12 +111888,17 @@ if ("geolocation" in navigator) {//console.log(
   //})
   //);
 } else {
-  console.log('no geolocation');
-} // The api key for the zomato api
-// feel free to change as needed
+  console.log("no geolocation");
+}
+/**
+ *  The api key for the zomato api
+ */
 
 
-var zomatoApiKey = "4732218ff276d0553217a3671fcd8ebf"; // if we hit the enter button on the query input don't submit the form
+var zomatoApiKey = "4732218ff276d0553217a3671fcd8ebf";
+/**
+ * Prevent enter button on the query input from submitting the form
+ */
 
 jquery__WEBPACK_IMPORTED_MODULE_1___default()("#query-input").on("keydown", function (e) {
   if (e.keyCode == 13) e.preventDefault();
@@ -111921,25 +111930,65 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()("#search-btn").on("click", functio
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _faker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./faker */ "./src/faker.js");
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _faker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./faker */ "./src/faker.js");
 
- // append the modal content
 
-var appendModalContent = function appendModalContent(content) {
-  $(".modal-body").empty();
-  $(".modal-body").append(content);
-}; // When you run the function, it appends the profile to the modal
+/**
+ * Appends content to the modal content
+ *
+ * This method assumes that a bootstrap modal is used
+ * A selector may be passed in to customize where
+ * content is inserted
+ *
+ * @param {String} [selector=.modal-body] the selector to target for inserting content
+ * @param {String}  content - the html content to be inserted into the selector
+ */
+
+var appendModalContent = function appendModalContent(content, title) {
+  var selector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ".modal-body";
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector).empty();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector).append(content);
+
+  if (title) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".modal-title").text(title);
+  }
+};
+/**
+ * Appends the chef's profile to the modal body
+ *
+ * @param {String} profile - The html representation of a chef
+ */
 
 
 var appendChefProfile = function appendChefProfile(profile) {
-  appendModalContent("\n    <div class = \"modalProfile\">\n      <p>This is the bio: ".concat(profile.bio, "</p>\n      <p>Company: ").concat(profile.company, "</p>\n      <p>Email: ").concat(profile.email, "</p>\n    </div>\n  "));
-  $(".modal-title").text("".concat(profile.name));
+  appendModalContent("\n    <div class = \"modalProfile\">\n      <p>This is the bio: ".concat(profile.bio, "</p>\n      <p>Company: ").concat(profile.company, "</p>\n      <p>Email: ").concat(profile.email, "</p>\n    </div>\n  "), profile.name);
 };
+/**
+ *
+ * @param {Object} Restaurant - the restaurant object return from the api
+ * @param {Object} Restaurant.restaurant the restaurtant object containing restaurant info
+ */
+
 
 var appendRestaurantProfile = function appendRestaurantProfile(_ref) {
   var restaurant = _ref.restaurant;
-  appendModalContent("\n    <div class=\"modalProfile\">\n      ".concat(restaurant.name, "\n    </div>\n  "));
+  appendModalContent("\n    <div class=\"modalProfile\">\n      ".concat(restaurant.name, "\n    </div>\n  "), restaurant.name);
+};
+/**
+ * Build up the results pate
+ *
+ * @param {String} chefProfiles - html content representing chef profiles
+ * @param {String} restaurantView - html content respresenting restaurants
+ *
+ * @return {String} resultsPage - html content representing the entire results page
+ */
+
+
+var buildResultsPage = function buildResultsPage(chefProfiles, restaurantView) {
+  var resultsPage = "\n    <nav class=\"navbar navbar-expand-lg navbar-dark mb-5\" style=\"background-color: #8C4D2E;\">\n    <a class=\"navbar-brand\" href=\"#\">Neighborhood Chef</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n      <div class=\"navbar-nav\">\n        <a class=\"nav-item nav-link active\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n        <a class=\"nav-item nav-link\" href=\"#\">Features</a>\n        <a class=\"nav-item nav-link\" href=\"#\">Pricing</a>\n      </div>\n    </div>\n  </nav>\n    <div class=\"container\">\n      <div id=\"wrapper\">\n        <h2>Chefs</h2>\n        <div class=\"card-deck\" id=\"chef-results\">\n          ".concat(chefProfiles, "\n        </div>\n\n        <hr>\n\n        <h2>Restaurants</h2>\n        <div class=\"row\" id=\"restaurant-results\">\n          ").concat(restaurantView, "\n        </div>\n      </div>\n    </div>\n    ");
+  return resultsPage;
 };
 /**
  * Renders a list of results and appends them to page
@@ -111954,25 +112003,25 @@ var renderResultsPage = function renderResultsPage(restaurants) {
     var restaurant = _ref2.restaurant;
     restaurantView += "\n        <div class=\"col-4 col-xs-12\">\n        <div class=\"card mb-4 shadow-sm\">\n            <img class=\"\" src=\"".concat(restaurant.thumb, "\">\n            <div class=\"card-body\">\n              <p class=\"card-text\">").concat(restaurant.name, "</p>\n              <div class=\"d-flex justify-content-between align-items-center\">\n                <div class=\"btn-group\">\n                <a href=\"").concat(restaurant.menu_url, "\" target=\"_blank\" class=\"btn btn-sm btn-outline-secondary\">Home</a>\n                <a href=\"javascript:void(0)\" class=\"btn btn-sm btn-outline-secondary restaurant-modal\" data-rest-id=\"").concat(restaurant.id, "\">Contact</a>\n                </div>\n                <small class=\"text-muted\">X Miles Away</small>\n              </div>\n            </div>\n          </div>\n        </div>\n      ");
   });
-  var profiles = Object(_faker__WEBPACK_IMPORTED_MODULE_0__["createChefProfiles"])(4);
-  var resultsPage = "\n    <nav class=\"navbar navbar-expand-lg navbar-dark mb-5\" style=\"background-color: #8C4D2E;\">\n    <a class=\"navbar-brand\" href=\"#\">Neighborhood Chef</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n      <div class=\"navbar-nav\">\n        <a class=\"nav-item nav-link active\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n        <a class=\"nav-item nav-link\" href=\"#\">Features</a>\n        <a class=\"nav-item nav-link\" href=\"#\">Pricing</a>\n      </div>\n    </div>\n  </nav>\n    <div class=\"container\">\n      <div id=\"wrapper\">\n        <h2>Chefs</h2>\n        <div class=\"card-deck\" id=\"chef-results\">\n          ".concat(profiles, "\n        </div>\n\n        <hr>\n\n        <h2>Restaurants</h2>\n        <div class=\"row\" id=\"restaurant-results\">\n          ").concat(restaurantView, "\n        </div>\n      </div>\n    </div>\n    ");
+  var profiles = Object(_faker__WEBPACK_IMPORTED_MODULE_1__["createChefProfiles"])(4);
+  var resultsPage = buildResultsPage(profiles, restaurantView);
   renderPage(resultsPage); // chef card event listener
 
-  $('.chef-btn').on('click', function (event) {
-    var chef = _faker__WEBPACK_IMPORTED_MODULE_0__["chefs"].find(function (chef) {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".chef-btn").on("click", function (event) {
+    var chef = _faker__WEBPACK_IMPORTED_MODULE_1__["chefs"].find(function (chef) {
       return chef.id == event.target.dataset.chefId;
     });
     appendChefProfile(chef);
-    $('#chefModal').modal('show');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#chefModal").modal("show");
   }); // restaurant card event listener
 
-  $(".restaurant-modal").on("click", function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".restaurant-modal").on("click", function () {
     var rest = restaurants.find(function (_ref3) {
       var restaurant = _ref3.restaurant;
       return restaurant.id == event.target.dataset.restId;
     });
     appendRestaurantProfile(rest);
-    $('#chefModal').modal('show');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("#chefModal").modal("show");
   });
 };
 /**
@@ -111983,11 +112032,9 @@ var renderResultsPage = function renderResultsPage(restaurants) {
 
 
 var renderPage = function renderPage(page) {
-  var pageContainer = $("#page"); // pageContainer.fadeOut(400, function() {
-
+  var pageContainer = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#page");
   pageContainer.empty();
-  pageContainer.append(page); //.fadeIn();
-  // });
+  pageContainer.append(page);
 };
 /**
  * Shows the loading state inside of an element
@@ -111997,10 +112044,9 @@ var renderPage = function renderPage(page) {
 
 
 var showLoadingState = function showLoadingState(selector) {
-  $(selector).empty();
-  $(selector).append("<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>&nbsp;Loading...");
-}; // TODO: use object shorthand syntax
-
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector).empty();
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector).append("<span class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>&nbsp;Loading...");
+};
 
 var ui = {
   showLoadingState: showLoadingState,
@@ -112018,7 +112064,7 @@ var ui = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/MannyCortez/bootcamp/Neighborhood-Chef/src/main.js */"./src/main.js");
+module.exports = __webpack_require__(/*! /Users/erwinssaget/Code/homework/neighborhood-chef/src/main.js */"./src/main.js");
 
 
 /***/ })
