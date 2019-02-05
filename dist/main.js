@@ -111959,7 +111959,7 @@ var renderResultsPage = function renderResultsPage(restaurants) {
 
     if (restaurant.thumb == "") {
       console.log(1);
-      restaurant.thumb = "https://vignette.wikia.nocookie.net/thedailybugle/images/7/77/Ultimate_Spiderman_1.jpg/revision/latest/scale-to-width-down/365?cb=20120303020310";
+      restaurant.thumb = "https://res.cloudinary.com/dqmge8cle/image/upload/v1549389069/nclogo_alt.svg";
     }
 
     restaurantView += "\n        <div class=\"col-4 col-xs-12\">\n        <div class=\"card mb-4 shadow-sm\">\n            <img class=\"\" src=\"".concat(restaurant.thumb, "\">\n            <div class=\"card-body\">\n              <p class=\"card-text\">").concat(restaurant.name, "</p>\n              <div class=\"d-flex justify-content-between align-items-center\">\n                <div class=\"btn-group\">\n                <a href=\"").concat(restaurant.menu_url, "\" target=\"_blank\" class=\"btn btn-sm btn-outline-secondary\">Home</a>\n                <a href=\"javascript:void(0)\" class=\"btn btn-sm btn-outline-secondary restaurant-modal\" data-rest-id=\"").concat(restaurant.id, "\">Contact</a>\n                </div>\n                <small class=\"text-muted\">X Miles Away</small>\n              </div>\n            </div>\n          </div>\n        </div>\n      ");

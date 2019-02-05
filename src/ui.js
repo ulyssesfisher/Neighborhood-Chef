@@ -51,7 +51,7 @@ const renderResultsPage = function (restaurants) {
    
     if (restaurant.thumb == ""){
       console.log(1)
-      restaurant.thumb = "https://vignette.wikia.nocookie.net/thedailybugle/images/7/77/Ultimate_Spiderman_1.jpg/revision/latest/scale-to-width-down/365?cb=20120303020310";
+      restaurant.thumb = "https://res.cloudinary.com/dqmge8cle/image/upload/v1549389069/nclogo_alt.svg"
     }
     restaurantView += `
         <div class="col-4 col-xs-12">
