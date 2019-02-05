@@ -1,6 +1,6 @@
 const $ = require("jquery");
 var faker = require('faker');
-const cuisineArray = ["American", "Greek", "Mexican","Chinese","Thai","Indian","Italian"];
+const cuisineArray = ["American", "Greek", "Mexican", "Chinese", "Thai", "Indian", "Italian"];
 const chefs = [];
 
 /**
@@ -10,7 +10,16 @@ const chefs = [];
  *
  * @return {String} An string containing the html template for a chef profile template
  */
-const createChefProfileTemplate = function(chef) {
+
+
+
+
+
+
+const createChefProfileTemplate = function (chef) {
+
+    const cuisine = $("#query-input").val().toUpperCase();
+
     return (`
         <div class="card p-2 col-3 col-xs-12 shadow-sm" id="chef-${chef.id}" style="width: 18rem;">
             <img class="card-img-top rounded" src="${chef.avatar}">
@@ -22,14 +31,17 @@ const createChefProfileTemplate = function(chef) {
 				<i class="fas fa-star"></i>
 				<i class="fas fa-star"></i>
 				<i class="fas fa-star-half-alt"></i>
-
+<p class=chef-cuisine>Chef Specialty: ${cuisine}</p>
 				<p class="text-muted text-center pt-3">
                 <div class = "chefBio">${chef.bio}</div>
 				</p>
 				<button class="btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn" data-chef-id="${chef.id}" style="width: 11.5rem;">See Menu</button>
             </div>
         </div>
-	`)
+    `)
+
+
+
 };
 
 /**
@@ -37,7 +49,7 @@ const createChefProfileTemplate = function(chef) {
  *
  * @return {Object} The chef object
  */
-const createChef = function() {
+const createChef = function () {
     return {
         id: faker.random.uuid(),
         avatar: faker.image.avatar(),
@@ -57,11 +69,11 @@ const createChef = function() {
  *
  * @return {String} template - a string representing all the chefs in a single template
  */
-const createChefProfiles = function(numberOfChefs){
+const createChefProfiles = function (numberOfChefs) {
 
     let template = "";
 
-    for(let i = 0; i < numberOfChefs; i++) {
+    for (let i = 0; i < numberOfChefs; i++) {
         const chef = createChef();
 
         template += createChefProfileTemplate(chef);
@@ -70,6 +82,6 @@ const createChefProfiles = function(numberOfChefs){
     }
 
     return template;
-  }
+}
 
-  export { createChefProfiles, chefs };
+export { createChefProfiles, chefs };

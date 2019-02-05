@@ -111812,7 +111812,8 @@ var chefs = [];
  */
 
 var createChefProfileTemplate = function createChefProfileTemplate(chef) {
-  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n                <div class = \"chefBio\">").concat(chef.bio, "</div>\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.id, "\" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n\t");
+  var cuisine = $("#query-input").val().toUpperCase();
+  return "\n        <div class=\"card p-2 col-3 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\" style=\"width: 18rem;\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body\">\n\t\t\t\t<img class=\"rounded-circle float-right\" height=\"57.91\" width=\"57.91\" src=\"").concat(chef.avatar, "\">\n\t\t\t\t<h5 class=\"card-title text-muted\">").concat(chef.name, "</h5>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n<p class=chef-cuisine>Chef Specialty: ").concat(cuisine, "</p>\n\t\t\t\t<p class=\"text-muted text-center pt-3\">\n                <div class = \"chefBio\">").concat(chef.bio, "</div>\n\t\t\t\t</p>\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.id, "\" style=\"width: 11.5rem;\">See Menu</button>\n            </div>\n        </div>\n    ");
 };
 /**
  * Creates an object containing key:pair values of the chef data
@@ -111933,13 +111934,15 @@ var appendModalContent = function appendModalContent(content) {
 
 
 var appendChefProfile = function appendChefProfile(profile) {
-  appendModalContent("\n    <div class = \"modalProfile\">\n      <p>This is the bio: ".concat(profile.bio, "</p>\n      <p>Company: ").concat(profile.company, "</p>\n      <p>Email: ").concat(profile.email, "</p>\n    </div>\n  "));
   $(".modal-title").text("".concat(profile.name));
+  appendModalContent("\n    <div class = \"modalProfile\">\n      <p>This is the bio: ".concat(profile.bio, "</p>\n      <p>Company: ").concat(profile.company, "</p>\n      <p>Email: ").concat(profile.email, "</p>\n\n    </div>\n  ")); // $(".modal-title").text(`${profile.name}`);
 };
 
 var appendRestaurantProfile = function appendRestaurantProfile(_ref) {
   var restaurant = _ref.restaurant;
-  appendModalContent("\n    <div class=\"modalProfile\">\n      ".concat(restaurant.name, "\n    </div>\n  "));
+  $(".modal-title").text("".concat(restaurant.name));
+  console.log(restaurant);
+  appendModalContent("\n    <div class=\"modalProfile\">\n    <p>Cuisine: ".concat(restaurant.cuisines, "</p>\n     <p> Address: ").concat(restaurant.location.address, "<br>").concat(restaurant.location.city, "</div></p>\n      <p>Rating: ").concat(restaurant.user_rating.aggregate_rating, "</p>\n      <p>Votes: ").concat(restaurant.user_rating.votes, "</p>\n    </div>\n  "));
 };
 /**
  * Renders a list of results and appends them to page
@@ -111952,6 +111955,13 @@ var renderResultsPage = function renderResultsPage(restaurants) {
   var restaurantView = "";
   restaurants.forEach(function (_ref2) {
     var restaurant = _ref2.restaurant;
+    console.log(restaurant.thumb);
+
+    if (restaurant.thumb == "") {
+      console.log(1);
+      restaurant.thumb = "https://vignette.wikia.nocookie.net/thedailybugle/images/7/77/Ultimate_Spiderman_1.jpg/revision/latest/scale-to-width-down/365?cb=20120303020310";
+    }
+
     restaurantView += "\n        <div class=\"col-4 col-xs-12\">\n        <div class=\"card mb-4 shadow-sm\">\n            <img class=\"\" src=\"".concat(restaurant.thumb, "\">\n            <div class=\"card-body\">\n              <p class=\"card-text\">").concat(restaurant.name, "</p>\n              <div class=\"d-flex justify-content-between align-items-center\">\n                <div class=\"btn-group\">\n                <a href=\"").concat(restaurant.menu_url, "\" target=\"_blank\" class=\"btn btn-sm btn-outline-secondary\">Home</a>\n                <a href=\"javascript:void(0)\" class=\"btn btn-sm btn-outline-secondary restaurant-modal\" data-rest-id=\"").concat(restaurant.id, "\">Contact</a>\n                </div>\n                <small class=\"text-muted\">X Miles Away</small>\n              </div>\n            </div>\n          </div>\n        </div>\n      ");
   });
   var profiles = Object(_faker__WEBPACK_IMPORTED_MODULE_0__["createChefProfiles"])(4);
@@ -111964,7 +111974,9 @@ var renderResultsPage = function renderResultsPage(restaurants) {
     });
     appendChefProfile(chef);
     $('#chefModal').modal('show');
-  }); // restaurant card event listener
+  }); // const cuisine = $( "#query-input" ).val();
+  //     console.log(cuisine)
+  // restaurant card event listener
 
   $(".restaurant-modal").on("click", function () {
     var rest = restaurants.find(function (_ref3) {
@@ -112018,7 +112030,7 @@ var ui = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/MannyCortez/bootcamp/Neighborhood-Chef/src/main.js */"./src/main.js");
+module.exports = __webpack_require__(/*! C:\Users\Ulysses Fisher\bootcamp\neighborhood-chef\src\main.js */"./src/main.js");
 
 
 /***/ })

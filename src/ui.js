@@ -10,21 +10,29 @@ const appendModalContent= function(content) {
 
 // When you run the function, it appends the profile to the modal
 const appendChefProfile = function (profile) {
+  $(".modal-title").text(`${profile.name}`);
+
   appendModalContent(`
     <div class = "modalProfile">
       <p>This is the bio: ${profile.bio}</p>
       <p>Company: ${profile.company}</p>
       <p>Email: ${profile.email}</p>
+
     </div>
   `);
 
-  $(".modal-title").text(`${profile.name}`);
+  // $(".modal-title").text(`${profile.name}`);
 };
 
 const appendRestaurantProfile = function ({ restaurant }) {
+  $(".modal-title").text(`${restaurant.name}`);
+console.log(restaurant);
   appendModalContent(`
     <div class="modalProfile">
-      ${restaurant.name}
+    <p>Cuisine: ${restaurant.cuisines}</p>
+     <p> Address: ${restaurant.location.address}<br>${restaurant.location.city}</div></p>
+      <p>Rating: ${restaurant.user_rating.aggregate_rating}</p>
+      <p>Votes: ${restaurant.user_rating.votes}</p>
     </div>
   `);
 }
@@ -38,6 +46,13 @@ const renderResultsPage = function (restaurants) {
   let restaurantView = "";
 
   restaurants.forEach(function ({ restaurant }) {
+    console.log(restaurant.thumb);
+   
+   
+    if (restaurant.thumb == ""){
+      console.log(1)
+      restaurant.thumb = "https://vignette.wikia.nocookie.net/thedailybugle/images/7/77/Ultimate_Spiderman_1.jpg/revision/latest/scale-to-width-down/365?cb=20120303020310";
+    }
     restaurantView += `
         <div class="col-4 col-xs-12">
         <div class="card mb-4 shadow-sm">
@@ -101,13 +116,20 @@ const renderResultsPage = function (restaurants) {
     $('#chefModal').modal('show');
   });
 
+
+// const cuisine = $( "#query-input" ).val();
+//     console.log(cuisine)
+
+
+
+
   // restaurant card event listener
   $(".restaurant-modal").on("click", function() {
     let rest = restaurants.find(function ({ restaurant }) {
       return restaurant.id == event.target.dataset.restId;
     });
 
-    appendRestaurantProfile(rest);
+    appendRestaurantProfile(rest,);
 
     $('#chefModal').modal('show');
   })
