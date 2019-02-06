@@ -1,35 +1,26 @@
+import $ from 'jquery'
 import { googleMapsKey } from '../apiKeys'
-import api from "./api";
 
 const googleMapsClient = require('@google/maps').createClient({
-    key: googleMapsKey
+	key: googleMapsKey,
+	Promise: Promise
 });
 
 let userPosition = {};
 
 const getDistance = (lat, lng) => {
-    googleMapsClient.distanceMatrix({
+   return googleMapsClient.distanceMatrix({
         origins: `${userPosition.coords.latitude}, ${userPosition.coords.longitude}`,
         destinations: `${lat}, ${lng}`,
-    }, function(err, response) {
-        if (!err) {
-            console.log(response.json)
-          } else if (err === 'timeout') {
-            // Handle timeout.
-          } else if (err.json) {
-            // Inspect err.status for more info.
-          } else {
-            // Handle network error.
-          }
-    })
+	}).asPromise()
 }
 
 const success = (position) => {
     userPosition = position;
 }
 
-const error = () => {
-    $("#alert").toast('show');
+const error = (error) => {
+    $(".toast").toast('show');
 }
 
 navigator.geolocation.getCurrentPosition(success, error)

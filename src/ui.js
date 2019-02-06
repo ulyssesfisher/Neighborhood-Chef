@@ -1,11 +1,14 @@
 import $ from "jquery";
 import template from './templates';
 import { showChefInfo, showRestaurantInfo } from './eventListeners'
+import { getDistance } from "./location";
 
 /**
  * Initilialize the alert toast
  */
-$('#alert').toast()
+$('.toast').toast({
+	delay: 2000
+})
 
 /**
  * Appends content to the modal content
@@ -43,10 +46,10 @@ const renderPage = function(page) {
  *
  * @param {String} selector the target selector
  */
-const showLoadingState = function(selector) {
+const showLoadingState = function(selector, loadingText="Loading...") {
   $(selector).empty();
   $(selector).append(
-    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;Loading...`
+    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;${loadingText}`
   );
 };
 
@@ -63,6 +66,13 @@ const renderResultsPage = function() {
 
   // restaurant card event listener
   $(".restaurant-modal").on("click", showRestaurantInfo);
+
+  $('.location').each(function() {
+	showLoadingState(this, " ");
+	getDistance(this.dataset.lat, this.dataset.lng).then((response) => {
+		$(this).text(response.json.rows[0].elements[0].duration.text)
+	})
+  })
 };
 
 const ui = {

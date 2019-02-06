@@ -50,7 +50,7 @@ const createRestaurantTemplate = function (restaurant) {
 
 	return (`
 		<div class="col-md-4 col-xs-12">
-			<div class="card mb-4 shadow-sm">
+			<div class="card mb-4 shadow-sm" id="${restaurant.id}">
 				<img class="card-img-top" src="${restaurant.thumb}">
 				<div class="card-body">
 					<p class="card-text">${restaurant.name}</p>
@@ -59,7 +59,7 @@ const createRestaurantTemplate = function (restaurant) {
 							<a href="${restaurant.menu_url}" target="_blank" class="btn btn-sm btn-outline-secondary">Menu</a>
 							<a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary restaurant-modal" data-rest-id="${restaurant.id}">Details</a>
 						</div>
-						<small class="text-muted">X Miles Away</small>
+						<small class="text-muted location" data-lat="${restaurant.location.latitude}" data-lng="${restaurant.location.longitude}"></small>
 					</div>
 				</div>
 			</div>
