@@ -5,6 +5,7 @@ import { set } from "./restaurants";
 import { chefs } from "./chefs";
 import { restaurants } from './restaurants';
 import ui from './ui';
+import { initMap } from './location'
 
 /**
  * Prevent enter button on the query input from submitting the form
@@ -58,15 +59,27 @@ const showRestaurantInfo = function() {
 	let r = restaurant.restaurant;
 
 	ui.appendModalContent(`
-		<div class="modalProfile">
+		<div class="modalProfile" id="${r.id}">
 			<p>Cuisine: ${r.cuisines}</p>
 			<p> Address: ${r.location.address}<br>${r.location.city}</div></p>
 			<p>Rating: ${r.user_rating.aggregate_rating}</p>
 			<p>Votes: ${r.user_rating.votes}</p>
+			<div id="map"></div>
 		</div>
 	`, r.name);
 
-	$("#info-modal").modal("show");
+	 $("#info-modal").modal("show");
+
+	console.log(parseFloat(r.location.latitude)),
+	console.log(parseFloat(r.location.longitude))
+	 new google.maps.Map(document.getElementById(`map`), {
+		center: {
+			lat: parseFloat(r.location.latitude),
+			lng: parseFloat(r.location.longitude)
+		},
+		zoom: 15
+	  });
+
 }
 
 export {

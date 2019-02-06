@@ -67,12 +67,15 @@ const renderResultsPage = function() {
   // restaurant card event listener
   $(".restaurant-modal").on("click", showRestaurantInfo);
 
+  // attach async time to
   if (userPosition.coords) {
 	$('.location').each(function() {
 		showLoadingState(this, " ");
 		getDistance(this.dataset.lat, this.dataset.lng).then(
-			(response) => $(this).text(response.json.rows[0].elements[0].duration.text)
-		)
+			response => $(this).text(response.json.rows[0].elements[0].duration.text)
+		).catch(error => {
+			// ?
+		})
 	})
   }
 };

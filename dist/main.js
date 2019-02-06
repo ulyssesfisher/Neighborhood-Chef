@@ -141067,6 +141067,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _restaurants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./restaurants */ "./src/restaurants.js");
 /* harmony import */ var _chefs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chefs */ "./src/chefs.js");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ui */ "./src/ui.js");
+/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./location */ "./src/location.js");
+
 
 
 
@@ -141111,8 +141113,16 @@ var showRestaurantInfo = function showRestaurantInfo() {
     return restaurant.id == event.target.dataset.restId;
   });
   var r = restaurant.restaurant;
-  _ui__WEBPACK_IMPORTED_MODULE_5__["default"].appendModalContent("\n\t\t<div class=\"modalProfile\">\n\t\t\t<p>Cuisine: ".concat(r.cuisines, "</p>\n\t\t\t<p> Address: ").concat(r.location.address, "<br>").concat(r.location.city, "</div></p>\n\t\t\t<p>Rating: ").concat(r.user_rating.aggregate_rating, "</p>\n\t\t\t<p>Votes: ").concat(r.user_rating.votes, "</p>\n\t\t</div>\n\t"), r.name);
+  _ui__WEBPACK_IMPORTED_MODULE_5__["default"].appendModalContent("\n\t\t<div class=\"modalProfile\" id=\"".concat(r.id, "\">\n\t\t\t<p>Cuisine: ").concat(r.cuisines, "</p>\n\t\t\t<p> Address: ").concat(r.location.address, "<br>").concat(r.location.city, "</div></p>\n\t\t\t<p>Rating: ").concat(r.user_rating.aggregate_rating, "</p>\n\t\t\t<p>Votes: ").concat(r.user_rating.votes, "</p>\n\t\t\t<div id=\"map\"></div>\n\t\t</div>\n\t"), r.name);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()("#info-modal").modal("show");
+  console.log(parseFloat(r.location.latitude)), console.log(parseFloat(r.location.longitude));
+  new google.maps.Map(document.getElementById("map"), {
+    center: {
+      lat: parseFloat(r.location.latitude),
+      lng: parseFloat(r.location.longitude)
+    },
+    zoom: 15
+  });
 };
 
 
@@ -141123,13 +141133,14 @@ var showRestaurantInfo = function showRestaurantInfo() {
 /*!*************************!*\
   !*** ./src/location.js ***!
   \*************************/
-/*! exports provided: userPosition, getDistance */
+/*! exports provided: userPosition, getDistance, initMap */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userPosition", function() { return userPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDistance", function() { return getDistance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initMap", function() { return initMap; });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _apiKeys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../apiKeys */ "./apiKeys.js");
@@ -141370,7 +141381,7 @@ var renderResultsPage = function renderResultsPage() {
 
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".chef-btn").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showChefInfo"]); // restaurant card event listener
 
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".restaurant-modal").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showRestaurantInfo"]);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".restaurant-modal").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showRestaurantInfo"]); // attach async time to
 
   if (_location__WEBPACK_IMPORTED_MODULE_3__["userPosition"].coords) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.location').each(function () {
@@ -141379,6 +141390,7 @@ var renderResultsPage = function renderResultsPage() {
       showLoadingState(this, " ");
       Object(_location__WEBPACK_IMPORTED_MODULE_3__["getDistance"])(this.dataset.lat, this.dataset.lng).then(function (response) {
         return jquery__WEBPACK_IMPORTED_MODULE_0___default()(_this).text(response.json.rows[0].elements[0].duration.text);
+      }).catch(function (error) {// ?
       });
     });
   }
