@@ -9,7 +9,7 @@
 	 crossorigin="anonymous">
 	<script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7"
 	 crossorigin="anonymous"></script>
-	<link href="main.css" rel="stylesheet" type="text/css">
+	<link href="public/main.css" rel="stylesheet" type="text/css">
 	<title>Neighborhood Chef</title>
 </head>
 
@@ -20,16 +20,14 @@
 		</strong>
 	</noscript>
 	<div id="page">
-		<div id="category-search" class="d-flex justify-content-center align-items-center flex-column pl-5" style="color: #8C4D2E;">
-			<h1 class="font-weight-bold" style="font-size: 3rem;">The Neighborhood Chef</h1>
-			<form autocomplete="off">
-				<div class="input-group input-group-lg border-rounded">
-					<input class="form-control rounded-pill chef-cuisine" placeholder="I'm in the mood for..." type="text" name="query"
-					 id="query-input">
-					<div class="input-group-append ml-2">
-						<span class="input-group-text rounded-pill text-white" style="background-color: #8C4D2E;" id="search-btn">Search</span>
-					</div>
+		<div id="category-search" class="d-flex justify-content-center align-items-center flex-column pl-md-5" style="color: #8C4D2E;">
+			<div class="logo"></div>
+			<h1 class="text-sm-center w-75"><span style="color: #CBC9C9;">Neighborhood</span> <span style="color: #AF4511;">Chef</span></h1>
+			<form autocomplete="off" class="d-flex flex-column flex-md-row w-75">
+				<div class="form-group border-rounded">
+					<input class="form-control rounded-pill chef-cuisine" placeholder="I'm in the mood for..." type="text" name="query" id="query-input">
 				</div>
+				<button class="rounded-pill text-white align-self-end" style="background-color: transparent;" id="search-btn">Search</button>
 			</form>
 		</div>
 	</div>
@@ -52,22 +50,8 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- toast alert-->
-		<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false" id="alert">
-			<div class="toast-header">
-				<strong class="mr-auto">Bootstrap</strong>
-				<small>11 mins ago</small>
-				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="toast-body">
-				There was an error getting your location.
-			</div>
-		</div>
 	</div>
-	<script src="../dist/main.js"></script>
+	<script src="dist/main.js"></script>
 </body>
 
 </html>
