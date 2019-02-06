@@ -1,7 +1,7 @@
 import $ from "jquery";
 import template from './templates';
 import { showChefInfo, showRestaurantInfo } from './eventListeners'
-import { getDistance } from "./location";
+import { getDistance, userPosition } from "./location";
 
 /**
  * Initilialize the alert toast
@@ -67,12 +67,14 @@ const renderResultsPage = function() {
   // restaurant card event listener
   $(".restaurant-modal").on("click", showRestaurantInfo);
 
-  $('.location').each(function() {
-	showLoadingState(this, " ");
-	getDistance(this.dataset.lat, this.dataset.lng).then((response) => {
-		$(this).text(response.json.rows[0].elements[0].duration.text)
+  if (userPosition.coords) {
+	$('.location').each(function() {
+		showLoadingState(this, " ");
+		getDistance(this.dataset.lat, this.dataset.lng).then(
+			(response) => $(this).text(response.json.rows[0].elements[0].duration.text)
+		)
 	})
-  })
+  }
 };
 
 const ui = {

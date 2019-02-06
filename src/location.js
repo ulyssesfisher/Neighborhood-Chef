@@ -25,4 +25,4 @@ const error = (error) => {
 
 navigator.geolocation.getCurrentPosition(success, error)
 
-export { userLocation, getDistance };
+export { userPosition, getDistance };

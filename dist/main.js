@@ -141123,12 +141123,12 @@ var showRestaurantInfo = function showRestaurantInfo() {
 /*!*************************!*\
   !*** ./src/location.js ***!
   \*************************/
-/*! exports provided: userLocation, getDistance */
+/*! exports provided: userPosition, getDistance */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userLocation", function() { return userLocation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userPosition", function() { return userPosition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDistance", function() { return getDistance; });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
@@ -141371,14 +141371,17 @@ var renderResultsPage = function renderResultsPage() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".chef-btn").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showChefInfo"]); // restaurant card event listener
 
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".restaurant-modal").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showRestaurantInfo"]);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.location').each(function () {
-    var _this = this;
 
-    showLoadingState(this, " ");
-    Object(_location__WEBPACK_IMPORTED_MODULE_3__["getDistance"])(this.dataset.lat, this.dataset.lng).then(function (response) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()(_this).text(response.json.rows[0].elements[0].duration.text);
+  if (_location__WEBPACK_IMPORTED_MODULE_3__["userPosition"].coords) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.location').each(function () {
+      var _this = this;
+
+      showLoadingState(this, " ");
+      Object(_location__WEBPACK_IMPORTED_MODULE_3__["getDistance"])(this.dataset.lat, this.dataset.lng).then(function (response) {
+        return jquery__WEBPACK_IMPORTED_MODULE_0___default()(_this).text(response.json.rows[0].elements[0].duration.text);
+      });
     });
-  });
+  }
 };
 
 var ui = {
