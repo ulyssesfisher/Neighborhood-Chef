@@ -1,0 +1,15 @@
+/**
+ * Copy this file into the root of your project and add your
+ * own api keys to this file.
+ */
+module.exports = {
+    /**
+     * The api key for google maps
+     */
+    googleMapsKey: "",
+
+    /**
+     *  The api key for the zomato api
+     */
+    zomatoApiKey: ""
+}
