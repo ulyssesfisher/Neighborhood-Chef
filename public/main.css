@@ -17,6 +17,49 @@ body,
     background-repeat: no-repeat;
 }
 
-form {
-    width: 600px;
+.line-clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+}
+
+.logo {
+	height: 225px;
+	content: url("https://res.cloudinary.com/dqmge8cle/image/upload/v1549476851/neighborhoodchef_logo.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+#map {
+	height: 46px;
+	width: 100%;
+}
+
+#search-btn {
+	filter: brightness(55%);
+}
+
+#search-btn:hover {
+	filter: brightness(100%);
+}
+
+@media (min-width: 768px) {
+	#inner-container {
+		width: 550px;
+	}
+
+	.n {
+		color: #AF4511;
+	}
+
+}
+
+@media (max-width: 575.98px) {
+	#category-search {
+		background-image: url("https://res.cloudinary.com/dqmge8cle/image/upload/v1549476534/mobile_picture_small-edited.jpg");
+	}
+
+	.n {
+		color: #CBC9C9;
+	}
 }

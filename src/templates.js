@@ -13,43 +13,59 @@ const createChefProfileTemplate = function (chef) {
 	const cuisine = $("#query-input").val().toUpperCase();
 
 	return (`
-        <div class="card p-2 col-3 col-xs-12 shadow-sm" id="chef-${chef.id}" style="width: 18rem;">
+        <div class="card p-2 col-sm-4 col-xs-12 shadow-sm" id="chef-${chef.id}">
             <img class="card-img-top rounded" src="${chef.avatar}">
-            <div class="card-body">
-				<img class="rounded-circle float-right" height="57.91" width="57.91" src="${chef.avatar}">
-				<h5 class="card-title text-muted">${chef.name}</h5>
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star"></i>
-				<i class="fas fa-star-half-alt"></i>
-				<p class=chef-cuisine>Chef Specialty: ${cuisine}</p>
-				<p class="text-muted text-center pt-3">
-                <div class = "chefBio">${chef.bio}</div>
+            <div class="card-body d-flex flex-column align-items-center">
+				<h5 class="card-title text-muted">
+					${chef.name}
+				</h5>
+
+				<div>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star-half-alt"></i>
+				</div>
+
+				<span class="badge badge-secondary">${cuisine}</span>
+
+				<p class="text-muted overflow-hidden line-clamp mt-3">
+					${chef.bio}
 				</p>
-				<button class="btn btn-primary btn-lg d-block mx-auto rounded-pill chef-btn" data-chef-id="${chef.id}" style="width: 11.5rem;">See Menu</button>
+
+				<button class="btn btn-primary btn-lg d-block mt-auto rounded-pill chef-btn" data-chef-id="${chef.id}">
+					Details
+				</button>
             </div>
         </div>
     `)
 };
 
+/**
+ * Create an html template for the restaurant profile
+ *
+ * @param {Object) An object representing the restaurant data
+ *
+ * @return {String} An string containing the html template for a chef profile template
+ */
 const createRestaurantTemplate = function (restaurant) {
 	if (restaurant.thumb == "") {
 		restaurant.thumb = "https://res.cloudinary.com/dqmge8cle/image/upload/v1549389069/nclogo_alt.svg"
 	}
 
 	return (`
-		<div class="col-4 col-xs-12">
-			<div class="card mb-4 shadow-sm">
-				<img class="" src="${restaurant.thumb}">
+		<div class="col-md-4 col-xs-12">
+			<div class="card mb-4 shadow-sm" id="${restaurant.id}">
+				<img class="card-img-top" src="${restaurant.thumb}">
 				<div class="card-body">
 					<p class="card-text">${restaurant.name}</p>
 					<div class="d-flex justify-content-between align-items-center">
 						<div class="btn-group">
-							<a href="${ restaurant.menu_url}" target="_blank" class="btn btn-sm btn-outline-secondary">Home</a>
-							<a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary restaurant-modal" data-rest-id="${ restaurant.id}">Contact</a>
+							<a href="${restaurant.menu_url}" target="_blank" class="btn btn-sm btn-outline-secondary">Menu</a>
+							<a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary restaurant-modal" data-rest-id="${restaurant.id}">Details</a>
 						</div>
-						<small class="text-muted">X Miles Away</small>
+						<small class="text-muted location" data-lat="${restaurant.location.latitude}" data-lng="${restaurant.location.longitude}"></small>
 					</div>
 				</div>
 			</div>
@@ -81,9 +97,6 @@ const createChefProfiles = function (numberOfChefs) {
 /**
  * Build up the results pate
  *
- * @param {String} chefProfiles - html content representing chef profiles
- * @param {String} restaurantView - html content respresenting restaurants
- *
  * @return {String} resultsPage - html content representing the entire results page
  */
 const buildResultsPage = function() {
@@ -97,28 +110,18 @@ const buildResultsPage = function() {
 
   return(`
     <nav class="navbar navbar-expand-lg navbar-dark mb-5" style="background-color: #8C4D2E;">
-    <a class="navbar-brand" href="#">Neighborhood Chef</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#">Features</a>
-        <a class="nav-item nav-link" href="#">Pricing</a>
-      </div>
-    </div>
-  </nav>
+		<a class="navbar-brand" href="index.html">Neighborhood Chef</a>
+	</nav>
     <div class="container">
       <div id="wrapper">
-        <h2>Chefs</h2>
+        <h2 class="text-md-left text-center">Chefs</h2>
         <div class="card-deck" id="chef-results">
           ${chefProfiles}
         </div>
 
         <hr>
 
-        <h2>Restaurants</h2>
+        <h2 class="text-md-left text-center">Restaurants</h2>
         <div class="row" id="restaurant-results">
           ${restaurantView}
         </div>
