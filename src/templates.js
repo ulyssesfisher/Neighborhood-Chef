@@ -16,7 +16,6 @@ const createChefProfileTemplate = function (chef) {
         <div class="card p-2 col-sm-4 col-xs-12 shadow-sm" id="chef-${chef.id}">
             <img class="card-img-top rounded" src="${chef.avatar}">
             <div class="card-body d-flex flex-column align-items-center">
-
 				<h5 class="card-title text-muted">
 					${chef.name}
 				</h5>
@@ -43,6 +42,13 @@ const createChefProfileTemplate = function (chef) {
     `)
 };
 
+/**
+ * Create an html template for the restaurant profile
+ *
+ * @param {Object) An object representing the restaurant data
+ *
+ * @return {String} An string containing the html template for a chef profile template
+ */
 const createRestaurantTemplate = function (restaurant) {
 	if (restaurant.thumb == "") {
 		restaurant.thumb = "https://res.cloudinary.com/dqmge8cle/image/upload/v1549389069/nclogo_alt.svg"
@@ -91,9 +97,6 @@ const createChefProfiles = function (numberOfChefs) {
 /**
  * Build up the results pate
  *
- * @param {String} chefProfiles - html content representing chef profiles
- * @param {String} restaurantView - html content respresenting restaurants
- *
  * @return {String} resultsPage - html content representing the entire results page
  */
 const buildResultsPage = function() {
@@ -107,8 +110,8 @@ const buildResultsPage = function() {
 
   return(`
     <nav class="navbar navbar-expand-lg navbar-dark mb-5" style="background-color: #8C4D2E;">
-	<a class="navbar-brand" href="index.html">Neighborhood Chef</a>
-  </nav>
+		<a class="navbar-brand" href="index.html">Neighborhood Chef</a>
+	</nav>
     <div class="container">
       <div id="wrapper">
         <h2 class="text-md-left text-center">Chefs</h2>

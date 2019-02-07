@@ -3,9 +3,9 @@ import api from "./api";
 import { zomatoApiKey } from "../apiKeys";
 import { set } from "./restaurants";
 import { chefs } from "./chefs";
-import { restaurants } from './restaurants';
-import ui from './ui';
-import { initMap } from './location'
+import { restaurants } from "./restaurants";
+import ui from "./ui";
+import { initMap } from "./location";
 
 /**
  * Prevent enter button on the query input from submitting the form
@@ -14,10 +14,14 @@ $("#query-input").on("keydown", function (e) {
 	if (e.keyCode == 13) e.preventDefault();
 });
 
-
-// The event that occurs when the user hits the search button for a category
+/**
+ * The event that occurs when the user hits the search button for a category
+ *
+ * @param {event} event The event listener event
+ */
 const search = function (event) {
 	event.preventDefault();
+
 	ui.showLoadingState(event.target);
 
 	const query = $("#query-input").val().trim();
@@ -34,6 +38,11 @@ const search = function (event) {
 	});
 }
 
+/**
+ * When triggered this event will show a modal that reveals the chef's info
+ *
+ * @param {event} event The event listener event
+ */
 const showChefInfo = function(event) {
 	let profile = chefs.find(function (chef) {
 		return chef.id == event.target.dataset.chefId;
@@ -50,11 +59,15 @@ const showChefInfo = function(event) {
 	$("#info-modal").modal("show");
 }
 
-const showRestaurantInfo = function() {
+/**
+ * When triggered this event will show a modal that reveals a restaurant's info
+ *
+ * @param {event} event The event listener event
+ */
+const showRestaurantInfo = function(event) {
 	let restaurant = restaurants.find(function ({ restaurant }) {
 		return restaurant.id == event.target.dataset.restId;
 	});
-
 
 	let r = restaurant.restaurant;
 
@@ -70,8 +83,6 @@ const showRestaurantInfo = function() {
 
 	 $("#info-modal").modal("show");
 
-	console.log(parseFloat(r.location.latitude)),
-	console.log(parseFloat(r.location.longitude))
 	 new google.maps.Map(document.getElementById(`map`), {
 		center: {
 			lat: parseFloat(r.location.latitude),
@@ -79,7 +90,6 @@ const showRestaurantInfo = function() {
 		},
 		zoom: 15
 	  });
-
 }
 
 export {

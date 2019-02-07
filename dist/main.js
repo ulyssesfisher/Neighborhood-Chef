@@ -141082,7 +141082,12 @@ __webpack_require__.r(__webpack_exports__);
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()("#query-input").on("keydown", function (e) {
   if (e.keyCode == 13) e.preventDefault();
-}); // The event that occurs when the user hits the search button for a category
+});
+/**
+ * The event that occurs when the user hits the search button for a category
+ *
+ * @param {event} event The event listener event
+ */
 
 var search = function search(event) {
   event.preventDefault();
@@ -141098,6 +141103,12 @@ var search = function search(event) {
     _ui__WEBPACK_IMPORTED_MODULE_5__["default"].renderResultsPage();
   });
 };
+/**
+ * When triggered this event will show a modal that reveals the chef's info
+ *
+ * @param {event} event The event listener event
+ */
+
 
 var showChefInfo = function showChefInfo(event) {
   var profile = _chefs__WEBPACK_IMPORTED_MODULE_4__["chefs"].find(function (chef) {
@@ -141106,8 +141117,14 @@ var showChefInfo = function showChefInfo(event) {
   _ui__WEBPACK_IMPORTED_MODULE_5__["default"].appendModalContent("\n\t\t<div class=\"modalProfile\">\n\t\t\t<p>Company: ".concat(profile.company, "</p>\n\t\t\t<p>Email: ").concat(profile.email, "</p>\n\t\t\t<p>This is the bio: ").concat(profile.bio, "</p>\n\t\t</div>\n\t"), profile.name);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()("#info-modal").modal("show");
 };
+/**
+ * When triggered this event will show a modal that reveals a restaurant's info
+ *
+ * @param {event} event The event listener event
+ */
 
-var showRestaurantInfo = function showRestaurantInfo() {
+
+var showRestaurantInfo = function showRestaurantInfo(event) {
   var restaurant = _restaurants__WEBPACK_IMPORTED_MODULE_3__["restaurants"].find(function (_ref) {
     var restaurant = _ref.restaurant;
     return restaurant.id == event.target.dataset.restId;
@@ -141115,7 +141132,6 @@ var showRestaurantInfo = function showRestaurantInfo() {
   var r = restaurant.restaurant;
   _ui__WEBPACK_IMPORTED_MODULE_5__["default"].appendModalContent("\n\t\t<div class=\"modalProfile\" id=\"".concat(r.id, "\">\n\t\t\t<p>Cuisine: ").concat(r.cuisines, "</p>\n\t\t\t<p> Address: ").concat(r.location.address, "<br>").concat(r.location.city, "</div></p>\n\t\t\t<p>Rating: ").concat(r.user_rating.aggregate_rating, "</p>\n\t\t\t<p>Votes: ").concat(r.user_rating.votes, "</p>\n\t\t\t<div id=\"map\"></div>\n\t\t</div>\n\t"), r.name);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()("#info-modal").modal("show");
-  console.log(parseFloat(r.location.latitude)), console.log(parseFloat(r.location.longitude));
   new google.maps.Map(document.getElementById("map"), {
     center: {
       lat: parseFloat(r.location.latitude),
@@ -141147,13 +141163,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apiKeys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_apiKeys__WEBPACK_IMPORTED_MODULE_1__);
 
 
+/**
+ * @constant
+ * @type {Object}
+ *
+ * The user's position if the browser supports and user's gives permission
+ */
+
+var userPosition = {};
+/**
+ * The google maps client
+ *
+ * The current instantiation makes it return methods as promise
+ * Code accordingly...
+ */
 
 var googleMapsClient = __webpack_require__(/*! @google/maps */ "./node_modules/@google/maps/lib/index.js").createClient({
   key: _apiKeys__WEBPACK_IMPORTED_MODULE_1__["googleMapsKey"],
   Promise: Promise
 });
+/**
+ * Locates how far away a place is using user's given coordinates
+ *
+ * @param {Number} lat The latitude coordinate to calculate distance from
+ * @param {Number} lng The longitude coordinate to calculate distance from
+ */
 
-var userPosition = {};
 
 var getDistance = function getDistance(lat, lng) {
   return googleMapsClient.distanceMatrix({
@@ -141161,16 +141196,22 @@ var getDistance = function getDistance(lat, lng) {
     destinations: "".concat(lat, ", ").concat(lng)
   }).asPromise();
 };
+/**
+ * Get the user's location
+ *
+ * First we check to make sure the browser supports geolocation
+ * If so, then we get the position and store it in the userPosition object
+ */
 
-var success = function success(position) {
-  userPosition = position;
-};
 
-var error = function error(_error) {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".toast").toast('show');
-};
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(function (position) {
+    userPosition = position;
+  }, function (error) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".toast").toast('show');
+  });
+}
 
-navigator.geolocation.getCurrentPosition(success, error);
 
 
 /***/ }),
@@ -141191,6 +141232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _eventListeners__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./eventListeners */ "./src/eventListeners.js");
 
 
+ // Start the app
 
 jquery__WEBPACK_IMPORTED_MODULE_1___default()("#search-btn").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["search"]);
 
@@ -141207,7 +141249,18 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()("#search-btn").on("click", _eventL
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restaurants", function() { return restaurants; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set", function() { return set; });
+/**
+ * @var
+ *
+ * @type {Array}
+ * The list of restaurants that match viewer's query
+ */
 var restaurants = [];
+/**
+ * Sets data upon the restaurants array
+ *
+ * @param {Array} data - the array of data from the zomato api
+ */
 
 var set = function set(data) {
   restaurants = data;
@@ -141243,8 +141296,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var createChefProfileTemplate = function createChefProfileTemplate(chef) {
   var cuisine = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#query-input").val().toUpperCase();
-  return "\n        <div class=\"card p-2 col-sm-4 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body d-flex flex-column align-items-center\">\n\n\t\t\t\t<h5 class=\"card-title text-muted\">\n\t\t\t\t\t").concat(chef.name, "\n\t\t\t\t</h5>\n\n\t\t\t\t<div>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<span class=\"badge badge-secondary\">").concat(cuisine, "</span>\n\n\t\t\t\t<p class=\"text-muted overflow-hidden line-clamp mt-3\">\n\t\t\t\t\t").concat(chef.bio, "\n\t\t\t\t</p>\n\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mt-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.id, "\">\n\t\t\t\t\tDetails\n\t\t\t\t</button>\n            </div>\n        </div>\n    ");
+  return "\n        <div class=\"card p-2 col-sm-4 col-xs-12 shadow-sm\" id=\"chef-".concat(chef.id, "\">\n            <img class=\"card-img-top rounded\" src=\"").concat(chef.avatar, "\">\n            <div class=\"card-body d-flex flex-column align-items-center\">\n\t\t\t\t<h5 class=\"card-title text-muted\">\n\t\t\t\t\t").concat(chef.name, "\n\t\t\t\t</h5>\n\n\t\t\t\t<div>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star\"></i>\n\t\t\t\t\t<i class=\"fas fa-star-half-alt\"></i>\n\t\t\t\t</div>\n\n\t\t\t\t<span class=\"badge badge-secondary\">").concat(cuisine, "</span>\n\n\t\t\t\t<p class=\"text-muted overflow-hidden line-clamp mt-3\">\n\t\t\t\t\t").concat(chef.bio, "\n\t\t\t\t</p>\n\n\t\t\t\t<button class=\"btn btn-primary btn-lg d-block mt-auto rounded-pill chef-btn\" data-chef-id=\"").concat(chef.id, "\">\n\t\t\t\t\tDetails\n\t\t\t\t</button>\n            </div>\n        </div>\n    ");
 };
+/**
+ * Create an html template for the restaurant profile
+ *
+ * @param {Object) An object representing the restaurant data
+ *
+ * @return {String} An string containing the html template for a chef profile template
+ */
+
 
 var createRestaurantTemplate = function createRestaurantTemplate(restaurant) {
   if (restaurant.thumb == "") {
@@ -141276,9 +141337,6 @@ var createChefProfiles = function createChefProfiles(numberOfChefs) {
 /**
  * Build up the results pate
  *
- * @param {String} chefProfiles - html content representing chef profiles
- * @param {String} restaurantView - html content respresenting restaurants
- *
  * @return {String} resultsPage - html content representing the entire results page
  */
 
@@ -141290,7 +141348,7 @@ var buildResultsPage = function buildResultsPage() {
     restaurantView += createRestaurantTemplate(restaurant);
   });
   var chefProfiles = createChefProfiles(4);
-  return "\n    <nav class=\"navbar navbar-expand-lg navbar-dark mb-5\" style=\"background-color: #8C4D2E;\">\n\t<a class=\"navbar-brand\" href=\"index.html\">Neighborhood Chef</a>\n  </nav>\n    <div class=\"container\">\n      <div id=\"wrapper\">\n        <h2 class=\"text-md-left text-center\">Chefs</h2>\n        <div class=\"card-deck\" id=\"chef-results\">\n          ".concat(chefProfiles, "\n        </div>\n\n        <hr>\n\n        <h2 class=\"text-md-left text-center\">Restaurants</h2>\n        <div class=\"row\" id=\"restaurant-results\">\n          ").concat(restaurantView, "\n        </div>\n      </div>\n    </div>\n    ");
+  return "\n    <nav class=\"navbar navbar-expand-lg navbar-dark mb-5\" style=\"background-color: #8C4D2E;\">\n\t\t<a class=\"navbar-brand\" href=\"index.html\">Neighborhood Chef</a>\n\t</nav>\n    <div class=\"container\">\n      <div id=\"wrapper\">\n        <h2 class=\"text-md-left text-center\">Chefs</h2>\n        <div class=\"card-deck\" id=\"chef-results\">\n          ".concat(chefProfiles, "\n        </div>\n\n        <hr>\n\n        <h2 class=\"text-md-left text-center\">Restaurants</h2>\n        <div class=\"row\" id=\"restaurant-results\">\n          ").concat(restaurantView, "\n        </div>\n      </div>\n    </div>\n    ");
 };
 
 var template = {
@@ -141333,8 +141391,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()('.toast').toast({
  * A selector may be passed in to customize where
  * content is inserted
  *
- * @param {String} [selector=.modal-body] the selector to target for inserting content
  * @param {String}  content - the html content to be inserted into the selector
+ * @param {String}  title - text to change modal title to
+ * @param {String} [selector=.modal-body] the selector to target for inserting content
  */
 
 var appendModalContent = function appendModalContent(content, title) {
@@ -141362,6 +141421,7 @@ var renderPage = function renderPage(page) {
  * Shows the loading state inside of an element
  *
  * @param {String} selector the target selector
+ * @param {String} [loadingText=Loading...] text to insert into loading state
  */
 
 
@@ -141381,7 +141441,7 @@ var renderResultsPage = function renderResultsPage() {
 
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(".chef-btn").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showChefInfo"]); // restaurant card event listener
 
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".restaurant-modal").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showRestaurantInfo"]); // attach async time to
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".restaurant-modal").on("click", _eventListeners__WEBPACK_IMPORTED_MODULE_2__["showRestaurantInfo"]); // if we have user's location let's show how far away restaurant is
 
   if (_location__WEBPACK_IMPORTED_MODULE_3__["userPosition"].coords) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.location').each(function () {
