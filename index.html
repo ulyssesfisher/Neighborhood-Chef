@@ -5,10 +5,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-	 crossorigin="anonymous">
-	<script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7"
-	 crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js"
+		integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7"
+		crossorigin="anonymous"></script>
 	<link href="public/main.css" rel="stylesheet" type="text/css">
 	<title>Neighborhood Chef</title>
 </head>
@@ -16,42 +17,48 @@
 <body>
 	<noscript>
 		<strong>
-			We're sorry but Neighborhood Chef doesn't work properly without JavaScript enabled. Please enable it to continue.
+			We're sorry but Neighborhood Chef doesn't work properly without JavaScript enabled. Please enable it to
+			continue.
 		</strong>
 	</noscript>
-	<div id="page">
-		<div id="category-search" class="d-flex justify-content-center align-items-center flex-column pl-md-5" style="color: #8C4D2E;">
-			<div class="logo"></div>
-			<h1 class="text-sm-center w-75"><span style="color: #CBC9C9;">Neighborhood</span> <span style="color: #AF4511;">Chef</span></h1>
-			<form autocomplete="off" class="d-flex flex-column flex-md-row w-75">
-				<div class="form-group border-rounded">
-					<input class="form-control rounded-pill chef-cuisine" placeholder="I'm in the mood for..." type="text" name="query"
-					 id="query-input">
-				</div>
-				<button class="rounded-pill text-white align-self-end" style="background-color: transparent;" id="search-btn">Search</button>
-			</form>
 
-			<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
-				<div class="toast" style="position: absolute; top: 1rem;">
-					<div class="toast-header">
-						<strong class="mr-auto">Location</strong>
-						<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+	<div id="page">
+		<div id="category-search" class="" style="color: #8C4D2E;">
+			<div class="pl-md-5 h-100 container d-flex flex-column align-items-center justify-content-center text-center" id="inner-container">
+				<img class="logo">
+				<h1><span class="n">Neighborhood</span> <span style="color: #AF4511;">Chef</span>
+				</h1>
+				<form autocomplete="off" class="w-100">
+					<div class="form-group border-rounded">
+						<input class="form-control form-control-lg rounded-pill chef-cuisine" placeholder="I'm in the mood for..."
+							type="text" name="query" id="query-input">
 					</div>
-					<div class="toast-body">
-						Neighborhood Chef works best with your location provided. Please consider giving us permission to use
-						your location. We promise to only use it to better your experience.
+					<button id="search-btn" type="button" class="rounded-pill btn btn-outline-light btn-lg btn-block">Search</button>
+				</form>
+
+				<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
+					style="min-height: 200px;">
+					<div class="toast" style="position: absolute; top: 1rem;">
+						<div class="toast-header">
+							<strong class="mr-auto">Location</strong>
+							<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="toast-body">
+							Neighborhood Chef works best with your location provided. Please consider giving us
+							permission to use
+							your location. We promise to only use it to better your experience.
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<!-- modal -->
 	<div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-	 aria-hidden="true">
+		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -68,7 +75,8 @@
 			</div>
 		</div>
 	</div>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR9L_5mXq7V-c6F8O-KdimxJ6zPtCXnzA"></script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR9L_5mXq7V-c6F8O-KdimxJ6zPtCXnzA"></script>
 	<script src="dist/main.js"></script>
 </body>
 
