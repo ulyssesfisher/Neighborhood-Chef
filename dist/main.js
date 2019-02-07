@@ -141103,7 +141103,7 @@ var showChefInfo = function showChefInfo(event) {
   var profile = _chefs__WEBPACK_IMPORTED_MODULE_4__["chefs"].find(function (chef) {
     return chef.id == event.target.dataset.chefId;
   });
-  _ui__WEBPACK_IMPORTED_MODULE_5__["default"].appendModalContent("\n\t\t<div class=\"modalProfile\">\n\t\t\t<p>This is the bio: ".concat(profile.bio, "</p>\n\t\t\t<p>Company: ").concat(profile.company, "</p>\n\t\t\t<p>Email: ").concat(profile.email, "</p>\n\t\t</div>\n\t"), profile.name);
+  _ui__WEBPACK_IMPORTED_MODULE_5__["default"].appendModalContent("\n\t\t<div class=\"modalProfile\">\n\t\t\t<p>Company: ".concat(profile.company, "</p>\n\t\t\t<p>Email: ").concat(profile.email, "</p>\n\t\t\t<p>This is the bio: ").concat(profile.bio, "</p>\n\t\t</div>\n\t"), profile.name);
   jquery__WEBPACK_IMPORTED_MODULE_0___default()("#info-modal").modal("show");
 };
 
@@ -141324,7 +141324,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()('.toast').toast({
-  delay: 2000
+  autohide: false
 });
 /**
  * Appends content to the modal content

@@ -41,9 +41,9 @@ const showChefInfo = function(event) {
 
 	ui.appendModalContent(`
 		<div class="modalProfile">
-			<p>This is the bio: ${profile.bio}</p>
 			<p>Company: ${profile.company}</p>
 			<p>Email: ${profile.email}</p>
+			<p>This is the bio: ${profile.bio}</p>
 		</div>
 	`, profile.name);
 

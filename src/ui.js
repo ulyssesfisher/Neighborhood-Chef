@@ -7,7 +7,7 @@ import { getDistance, userPosition } from "./location";
  * Initilialize the alert toast
  */
 $('.toast').toast({
-	delay: 2000
+	autohide: false
 })
 
 /**
